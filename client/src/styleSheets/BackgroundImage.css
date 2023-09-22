@@ -1,0 +1,19 @@
+.backgroundImage {
+    isolation: isolate;
+}
+
+.backgroundImage__image {
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.backgroundImage__overlay {
+    z-index: 0;
+    position: absolute;
+    inset: 0;
+}
