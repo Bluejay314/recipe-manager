@@ -1,3 +1,5 @@
+import "@/styleSheets/HomePage.css";
+
 export default function HomePage() {
     return (
         <>
