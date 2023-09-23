@@ -1,9 +1,13 @@
 import "@/styleSheets/NavBar.css"
+import SearchBar from "./SearchBar"
 
 export default function NavBar() {
     return (
-        <div className="navBar">
-            <h2> NavBar </h2>
-        </div>
+        <ul className="navBar">
+            <li>Home</li>
+            <li>New Recipe</li>
+            <li>Options</li>
+            <SearchBar />
+        </ul>
     )
 }
