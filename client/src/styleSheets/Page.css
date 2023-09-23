@@ -1,0 +1,9 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    border: 2px solid red;
+  }
