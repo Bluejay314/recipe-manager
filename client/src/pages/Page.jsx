@@ -9,7 +9,9 @@ export default function Page({ children }) {
                 <Header />
                 <NavBar />
             </div>
-            {children}
+            <div className="page__content">
+                {children}
+            </div>
         </div>
     )
 }

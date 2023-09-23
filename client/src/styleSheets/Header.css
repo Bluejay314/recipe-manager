@@ -5,7 +5,7 @@
     padding: 0.5rem 2rem;
     padding-right: 4rem;
     width: 100%;
-    min-height: 10vh;
+    min-height: var(--page-header-height);
 
     background-color: white;
     color: black;
@@ -13,4 +13,17 @@
 
 .header__title {
     font-size: 3em;
+}
+
+.header__profileSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.header__profileButton {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
 }
