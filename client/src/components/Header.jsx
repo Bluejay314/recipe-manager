@@ -1,4 +1,5 @@
 import "@/styleSheets/Header.css";
+import { Settings } from "iconoir-react";
 
 export default function Header() {
     return (
@@ -6,7 +7,9 @@ export default function Header() {
             <h1 className="header__title">Recipe Manager</h1>
             <div className="header__profileSection">
                 <span>My Profile</span>
-                <button>P</button>
+                <button className="header__profileButton">
+                    <Settings color="black" height={36} width={36} />
+                </button>
             </div>
         </div>
     )
