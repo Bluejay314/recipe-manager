@@ -6,7 +6,7 @@ export default function Header() {
         <div className="header">
             <h1 className="header__title">Recipe Manager</h1>
             <div className="header__profileSection">
-                <span>My Profile</span>
+                My Profile
                 <button className="header__profileButton">
                     <Settings color="black" height={36} width={36} />
                 </button>
