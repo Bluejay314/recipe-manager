@@ -1,13 +1,19 @@
 import "./NavBar.css"
 import { SearchBar } from "@/components"
+import { Menu } from "iconoir-react"
 
 export function NavBar() {
     return (
-        <ul className="navBar">
-            <li>Home</li>
-            <li>New Recipe</li>
-            <li>Options</li>
+        <div className="navBar">
+            <ul className="navBar__md">
+                <li>Home</li>
+                <li>New Recipe</li>
+                <li>Options</li>
+            </ul>
+            <div className="navBar__sm">
+                <Menu />
+            </div>
             <SearchBar />
-        </ul>
+        </div>
     )
 }
