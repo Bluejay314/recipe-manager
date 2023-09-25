@@ -3,7 +3,7 @@
   a system that will eventually be incorporated into the server.
 */
 
-export default recipes = [{
+export const recipes = [{
     title: "Maple-Roasted Carrots with Carrot-Top Pesto",
     description: "Maple-roasted carrots are drizzled with a pesto made from carrot top greens, parsley, and almonds, resulting in a standout side dish that's vegetarian to boot.",
     image: "https://www.allrecipes.com/thmb/mM6e0FG3IP-4dxv3yeN7ST-FhPo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/5799868-c0e9345a6ffd45b79f515a3cffce20ba.jpg",
