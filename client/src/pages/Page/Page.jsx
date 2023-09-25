@@ -4,13 +4,13 @@ import "./Page.css";
 export function Page({ children }) {
     return (
         <div className="page">
-            <div>
+            <header>
                 <Header />
                 <NavBar />
-            </div>
-            <div className="page__content">
+            </header>
+            <main className="page__content">
                 {children}
-            </div>
+            </main>
         </div>
     )
 }
