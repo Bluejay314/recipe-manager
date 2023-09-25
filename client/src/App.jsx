@@ -1,14 +1,11 @@
 import { ErrorBoundary } from "react-error-boundary";
-import HomePage from "./pages/HomePage";
-import "./styleSheets/App.css";
-import ErrorPage from "./pages/ErrorPage";
+import { HomePage, ErrorPage } from "@/pages";
+import "./App.css";
 
-function App() {
+export default function App() {
     return (
 		<ErrorBoundary FallbackComponent={ErrorPage}>
 			<HomePage />
 		</ErrorBoundary>
 	);
 }
-
-export default App;
