@@ -2,14 +2,17 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     background-color: white;
     color: black;
 }
 
-h1 {
-    font-size: 5rem;
-    font-family: 'Raleway';
-    font-weight: 200;
+.homePage__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 13em);
+    gap: 1em;
+
+    width: 100%;
+    padding: 4em;
 }
