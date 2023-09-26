@@ -1,5 +1,3 @@
-import "./BackgroundImage.css";
-
 export function BackgroundImage({ image, opacity=0, color="black"}) {
     return (
         <div className="backgroundImage">

@@ -1,9 +1,0 @@
-.searchBar__input {
-    background-color: white;
-    color: black;
-    padding: 0 0.5em;
-}
-
-.searchBar__input:focus {
-    outline: inherit;
-}

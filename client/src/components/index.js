@@ -1,5 +1,7 @@
-export { BackgroundImage } from "./BackgroundImage/BackgroundImage"
-export { Card } from "./Card/Card";
-export { Header } from "./Header/Header"
-export { NavBar } from "./NavBar/NavBar"
-export { SearchBar } from "./SearchBar/SearchBar"
+export { BackgroundImage } from "./BackgroundImage"
+export { RecipeCard } from "./RecipeCard";
+export { Header } from "./Header"
+export { Logo } from "./Logo"
+export { NavBar } from "./NavBar"
+export { SearchBar } from "./SearchBar"
+export { SideBar } from "./SideBar"

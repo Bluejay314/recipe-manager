@@ -29,11 +29,12 @@
   font: inherit;
 }
 
-/* dark mode user-agent-styles */
+/* dark mode user-agent-styles 
 
 html {
   color-scheme: dark light;
 }
+*/
 
 /* min body height */
 
