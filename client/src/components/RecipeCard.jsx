@@ -8,14 +8,17 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, CardActionArea, Collapse, IconButton } from "@mui/material";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
-export function RecipeCard({ title, image, description }) {
+export function RecipeCard({ recipe }) {
     const [expanded, setExpanded] = useState(false);
+    const navigate = useNavigate();
 
     const handleExpandClick = () => setExpanded(!expanded);
 
-    const handleOpen = () => {
-        console.log("boop")
+    const handleOpen = (event) => {
+        event.preventDefault();
+        navigate(`/recipes?q=${recipe.id}`)
     }
 
     return (
@@ -24,9 +27,9 @@ export function RecipeCard({ title, image, description }) {
                 <CardActionArea onClick={handleOpen}>
                     <CardMedia
                         component="img"
-                        alt={title}
+                        alt={recipe.title}
                         width="100%"
-                        image={image}
+                        image={recipe.image}
                         sx={{aspectRatio: 1.5}}
                     />
                     <Box
@@ -52,11 +55,11 @@ export function RecipeCard({ title, image, description }) {
                 <Typography
                     variant="subtitle1"
                     component="div"
-                    gutterBottom
                     height="3em"
                     overflow="hidden"
+                    gutterBottom
                 >
-                    {title}
+                    {recipe.title}
                 </Typography>
                 <IconButton
                     onClick={handleExpandClick}
@@ -72,7 +75,7 @@ export function RecipeCard({ title, image, description }) {
             </CardContent>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <Typography variant="body1" color="text.secondary">
-                    {description}
+                    {recipe.description}
                 </Typography>
             </Collapse>
         </Card>

@@ -7,18 +7,14 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { CollapsableMenu } from "@/components";
 
-const defaultCategories = ["entree", "breakfast", "dinner", "dessert", "snack"];
-const defaultTags = [
-    "beef",
-    "chicken",
-    "pork",
-    "sweet",
-    "savoury",
-    "salty",
-    "sour",
-    "drink",
-    "food",
-];
+const defaultCategories = {
+    title: "categories",
+    labels: ["entree", "breakfast", "dinner", "dessert", "snack"]
+};
+const defaultTags = {
+    title: "tags",
+    labels: ["beef", "chicken", "pork", "sweet", "savoury", "salty", "sour", "drink", "food"]
+};
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -57,16 +53,10 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export function SideBar() {
-    const [expanded, setExpanded] = React.useState("panel1");
-
-    const handleChange = (panel) => (event, newExpanded) => {
-        setExpanded(newExpanded ? panel : false);
-    };
-
     return (
         <div>
-            <CollapsableMenu title="Categories" items={defaultCategories} />
-            <CollapsableMenu title="Tags" items={defaultTags} />
+            <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
+            <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
         </div>
     );
 }

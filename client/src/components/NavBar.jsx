@@ -10,12 +10,16 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { SearchBar } from ".";
+import { NavLink } from "react-router-dom";
 
-const pages = ["Home", "Settings", "Recipes"];
+const pages = [
+    {label: "Home", link: "/"},
+    {label: "Settings", link: "/settings"},
+    {label: "Recipes", link: "/search"}];
 
 export function NavBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    
+
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -61,28 +65,29 @@ export function NavBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                >
-                                    <Typography textAlign="center">
-                                        {page}
-                                    </Typography>
-                                </MenuItem>
+                                <MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>
+                                // <MenuItem
+                                //     key={page}
+                                //     onClick={handleCloseNavMenu}
+                                // >
+                                //     <Typography textAlign="center">
+                                //         {page}
+                                //     </Typography>
+                                // </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-
                     {/* This content defines the menu for larger screens */}
                     <Box sx={{display: { xs: "none", md: "flex" }}}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: "white", display: "block" }}
-                            >
-                                {page}
-                            </Button>
+                            <MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>
+                            // <Button
+                            //     key={page}
+                            //     onClick={handleCloseNavMenu}
+                            //     sx={{ my: 2, color: "white", display: "block" }}
+                            // >
+                            //     {page}
+                            // </Button>
                         ))}
                     </Box>
                     <SearchBar />

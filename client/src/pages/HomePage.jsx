@@ -7,7 +7,12 @@ export function HomePage() {
 
     return (
         <Page>
-            <SideBar />
+                <Typography
+                    variant="h2"
+                    textAlign="center"
+                >
+                    Home Page
+                </Typography>
         </Page>
     );
 }

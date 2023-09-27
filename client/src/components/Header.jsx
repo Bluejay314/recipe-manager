@@ -43,7 +43,11 @@ export function Header() {
             px={12}
         >
             {/* Content for the left side of the NavBar */}
-            <Box>
+            <Box
+                display="flex"
+                alignItems="center"
+            >
+                <img src=".\src\assets\logo.png" height="100vh"/>
                 <Logo content="CULINARY COMPOSER" variant="h5" />
             </Box>
             
