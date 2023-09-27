@@ -5,6 +5,7 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import { camelCase } from "@/util/format";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -42,16 +43,16 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-export function CollapsableMenu({ title, items }) {
+export function CollapsableMenu({ title, labels }) {
     const [expanded, setExpanded] = React.useState(true);
 
     const handleChange = () => {
         setExpanded(!expanded)
     };
 
-    const itemsDisplay = items.map(item => (
+    const itemsDisplay = labels.map(item => (
         <AccordionDetails>
-            <Typography>{item}</Typography>
+            <Typography>{camelCase(item)}</Typography>
         </AccordionDetails>
     ))
 
@@ -62,7 +63,7 @@ export function CollapsableMenu({ title, items }) {
                 onChange={() => handleChange()}
             >
                 <AccordionSummary id="panel1d-header">
-                    <Typography>{title}</Typography>
+                    <Typography>{camelCase(title)}</Typography>
                 </AccordionSummary>
                 {itemsDisplay}
             </Accordion>
