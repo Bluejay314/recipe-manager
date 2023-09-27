@@ -21,7 +21,7 @@ export function SearchPage({ items }) {
             <Box pl={4}>
                 <Grid container spacing={2}>
                     {items.map((item) => (
-                        <Grid sm={12} md={6} lg={4} xl={3}>
+                        <Grid key={item.id} sm={12} md={6} lg={4} xl={3}>
                             <RecipeCard recipe={item}/>
                         </Grid>
                     ))}

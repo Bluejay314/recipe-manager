@@ -50,12 +50,6 @@ export function CollapsableMenu({ title, labels }) {
         setExpanded(!expanded)
     };
 
-    const itemsDisplay = labels.map(item => (
-        <AccordionDetails>
-            <Typography>{camelCase(item)}</Typography>
-        </AccordionDetails>
-    ))
-
     return (
         <div>
             <Accordion
@@ -65,7 +59,11 @@ export function CollapsableMenu({ title, labels }) {
                 <AccordionSummary id="panel1d-header">
                     <Typography>{camelCase(title)}</Typography>
                 </AccordionSummary>
-                {itemsDisplay}
+                {labels.map(item => (
+                    <AccordionDetails key={item.id}>
+                        <Typography>{camelCase(item)}</Typography>
+                    </AccordionDetails>
+                ))}
             </Accordion>
         </div>
     );
