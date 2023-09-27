@@ -1,14 +1,14 @@
 import { HomePage, SearchPage } from "@/pages";
 import { Routes, Route } from "react-router-dom";
 
-function AppRoutes() {
+function AppRoutes(props) {
     return (
         <Routes>
             <Route index element={<HomePage />} />
 
             <Route
                 path="recipes"
-                element={<SearchPage />}
+                element={<SearchPage {...props} />}
             >
             </Route>
         </Routes>

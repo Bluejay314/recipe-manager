@@ -3,10 +3,12 @@ import { Container } from "@mui/material";
 
 export function Page({ children }) {
     return (
-        <Container maxWidth="100%" sx={{padding: "0px"}}>
+        <Container maxWidth>
             <Header />
             <NavBar />
-            {children}
+            <Container maxWidth="xl">
+                {children}
+            </Container>
         </Container>
     )
 }
