@@ -7,7 +7,7 @@ import { SideBar } from "@/components";
 export function RecipePage() {
     const query = useQuery();
     const recipeId = query.get("q");
-    const recipe = recipes.find(r => r.id = recipeId);
+    const recipe = recipes.find(r => r.id == recipeId);
 
     const ingredients = recipe.ingredients.map(ing => (
         <Box display="flex" alignItems="center">

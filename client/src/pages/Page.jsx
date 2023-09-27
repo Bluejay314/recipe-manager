@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 
 export function Page({ children }) {
     return (
-        <Container maxWidth>
+        <Container maxWidth="xl">
             <Header />
             <NavBar />
             <Container maxWidth="xl">
