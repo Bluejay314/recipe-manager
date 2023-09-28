@@ -1,9 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
-import { RecipeCard, SideBar } from "@/components";
+import { CollapsableMenu, RecipeCard, SideBar } from "@/components";
 import { Page } from "@/pages";
 import useQuery from "@/hooks/useQuery";
+
+const defaultCategories = {
+    title: "categories",
+    labels: ["entree", "breakfast", "dinner", "dessert", "snack"]
+};
+const defaultTags = {
+    title: "tags",
+    labels: ["beef", "chicken", "pork", "sweet", "savoury", "salty", "sour", "drink", "food"]
+};
 
 export function SearchPage({ items }) {
     const query = useQuery();
@@ -17,7 +26,10 @@ export function SearchPage({ items }) {
                 py: "4em",
                 px: {sm:"0.5em", md:"2em", lg: "4em"}
             }}>
-            <SideBar />
+            <Box>
+                <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
+                <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
+            </Box>
             <Box pl={4}>
                 <Grid container spacing={2}>
                     {items.map((item) => (

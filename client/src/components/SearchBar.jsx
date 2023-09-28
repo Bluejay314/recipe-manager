@@ -3,6 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
+import { Box, MenuItem } from "@mui/material";
 
 const Search = styled("form")(({ theme }) => ({
     position: "relative",
@@ -57,11 +58,15 @@ export function SearchBar() {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Search…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-            />
+            <Box sx={{display: { xs: "none", sm: "flex" }}}>
+                <StyledInputBase
+                    placeholder="Search…"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+            </Box>
+                {/* <MenuItem component="div" >meow</MenuItem> */}
+            
         </Search>
     );
 }
