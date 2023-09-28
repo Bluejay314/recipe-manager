@@ -1,9 +1,9 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
-import { CollapsableMenu, RecipeCard, SideBar } from "@/components";
+import { Box, Grid } from "@mui/material";
+import { CollapsableMenu, RecipeCard } from "@/components";
 import { Page } from "@/pages";
 import useQuery from "@/hooks/useQuery";
+import { Searcher } from "@/components/Searcher";
 
 const defaultCategories = {
     title: "categories",
@@ -20,27 +20,22 @@ export function SearchPage({ items }) {
 
     return (
         <Page>
-            <Box sx={{
-                display: "grid",
-                gridTemplateColumns: "20% 80%",
-                py: "4em",
-                px: {sm:"0.5em", md:"2em", lg: "4em"}
-            }}>
-            <Box>
-                <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
-                <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
-            </Box>
-            <Box pl={4}>
-                <Grid container spacing={2}>
+            
+            <Grid container py={4}>
+                <Grid item sm={3}>
+                    <Searcher />
+                    <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
+                    <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
+                </Grid>
+
+                <Grid item container  sm gap={2} justifyContent="center">
                     {items.map((item) => (
-                        <Grid key={item.id} sm={12} md={6} lg={4} xl={3}>
+                        <Grid item key={item.id} xs={12} sm={6} lg={4} xl={3}>
                             <RecipeCard recipe={item}/>
                         </Grid>
                     ))}
                 </Grid>
-            </Box>
-            </Box>
-            
+                </Grid>
         </Page>
         
     );

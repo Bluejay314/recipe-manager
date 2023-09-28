@@ -33,17 +33,15 @@ export function NavBar() {
             <Container maxWidth="xl">
                 {/* On a smaller screen the menu will be on the left. On larger screens options are centered. */}
                 <Toolbar sx={{display: { xs: "block", md: "flex" }, justifyContent:"center"}} disableGutters>
+
                     {/* This content defines the menu for smaller screens */}
                     <Box sx={{display: { xs: "flex", md: "none" }}}>
                         <IconButton
                             size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                        <MenuIcon />
                         </IconButton>
 
                         <Menu
@@ -64,33 +62,16 @@ export function NavBar() {
                                 display: { xs: "block", md: "none" },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>
-                                // <MenuItem
-                                //     key={page}
-                                //     onClick={handleCloseNavMenu}
-                                // >
-                                //     <Typography textAlign="center">
-                                //         {page}
-                                //     </Typography>
-                                // </MenuItem>
-                            ))}
+                            {pages.map((page) => (<MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>))}
                         </Menu>
                     </Box>
+                    
                     {/* This content defines the menu for larger screens */}
                     <Box sx={{display: { xs: "none", md: "flex" }}}>
                         {pages.map((page) => (
                             <MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>
-                            // <Button
-                            //     key={page}
-                            //     onClick={handleCloseNavMenu}
-                            //     sx={{ my: 2, color: "white", display: "block" }}
-                            // >
-                            //     {page}
-                            // </Button>
                         ))}
                     </Box>
-                    <SearchBar />
                 </Toolbar>
             </Container>
         </AppBar>

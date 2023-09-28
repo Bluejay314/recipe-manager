@@ -1,7 +1,5 @@
-import { Page, SearchPage } from "@/pages";
-import { Box } from "@mui/system";
+import { Page } from "@/pages";
 import { Typography } from "@mui/material";
-import { SideBar } from "@/components";
 
 export function HomePage() {
 

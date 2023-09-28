@@ -1,16 +1,12 @@
 import useQuery from "@/hooks/useQuery";
 import { Page } from "@/pages";
 import recipes from "../data/allrecipes";
-import { Box, Card, Grid, Typography } from "@mui/material";
-import { CollapsableMenu, SideBar } from "@/components";
+import { Box, Grid, Typography } from "@mui/material";
+import { CollapsableMenu } from "@/components";
 
-const defaultCategories = {
-    title: "categories",
-    labels: ["entree", "breakfast", "dinner", "dessert", "snack"]
-};
-const defaultTags = {
-    title: "tags",
-    labels: ["beef", "chicken", "pork", "sweet", "savoury", "salty", "sour", "drink", "food"]
+const defaultOptions = {
+    title: "actions",
+    labels: ["edit", "share", "delete", "branch"]
 };
 
 export function RecipePage() {
@@ -40,20 +36,21 @@ export function RecipePage() {
             <Grid container p={4}>
                 <Grid item md={3} sx={{display: { sm: "none", md: "block" }}}>
                     <Box>
-                        <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
-                        <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
+                        <CollapsableMenu title={defaultOptions.title} labels={defaultOptions.labels} />
                     </Box>
                 </Grid>
 
                 <Grid item container md pl={4} height="100%">
                     {/* Image Section */}
-                    <Grid item sm={12} md={5}>
+                    <Grid item  pb={6} sm={12} md={5}>
                         <img src={recipe.image} />
                     </Grid>
 
                     {/* Header Section */}
-                    <Grid item pl={4} pb={6} sm={12} md={7}>
-                        <Typography variant="h3">{recipe.title}</Typography>
+                    <Grid item pl={4} pb={6} sm={12} md={7} >
+                        <Typography variant="h4" pb={4} maxHeight="60%" overflow="hidden">
+                            {recipe.title}
+                        </Typography>
                         <Typography variant="body1">{recipe.description}</Typography>
                     </Grid>
 

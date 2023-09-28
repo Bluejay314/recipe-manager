@@ -11,13 +11,7 @@ const Search = styled("form")(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(3),
-        width: "auto",
-    },
+    }
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -64,9 +58,7 @@ export function SearchBar() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-            </Box>
-                {/* <MenuItem component="div" >meow</MenuItem> */}
-            
+            </Box>            
         </Search>
     );
 }
