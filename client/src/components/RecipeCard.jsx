@@ -74,7 +74,7 @@ export function RecipeCard({ recipe }) {
                 </IconButton>
             </CardContent>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <Typography variant="body1" color="text.secondary">
+                <Typography variant="body1" fontStyle="italic" color="text.secondary">
                     {recipe.description}
                 </Typography>
             </Collapse>
