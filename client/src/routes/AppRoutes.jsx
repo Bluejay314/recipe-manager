@@ -1,14 +1,17 @@
-import { HomePage, RecipePage, SearchPage } from "@/pages";
+import { CreateAccountForm, SignInForm } from "@/components";
+import { HomePage, LoginPage, RecipePage, SearchPage } from "@/pages";
 import { Routes, Route } from "react-router-dom";
 
-function AppRoutes(props) {
+export default function AppRoutes(props) {
     return (
         <Routes>
             <Route index element={<HomePage />} />
             <Route path="search" element={<SearchPage {...props} />} />
-            <Route path="recipes" element={<RecipePage {...props} />} />
+            <Route path="recipes" element={<RecipePage />} />
+            <Route path="account" element={<LoginPage />}>
+                <Route path="login" element={<SignInForm />} />
+                <Route path="signup" element={<CreateAccountForm />} />
+            </Route>
         </Routes>
     );
 }
-
-export default AppRoutes;

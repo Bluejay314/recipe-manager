@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorPage, SearchPage } from "@/pages";
 import "./App.css";
