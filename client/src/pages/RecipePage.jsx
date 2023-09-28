@@ -40,7 +40,7 @@ export function RecipePage() {
                     </Box>
                 </Grid>
 
-                <Grid item container md pl={4} height="100%">
+                <Grid item container md pl={4}>
                     {/* Image Section */}
                     <Grid item  pb={6} sm={12} md={5}>
                         <img src={recipe.image} />
