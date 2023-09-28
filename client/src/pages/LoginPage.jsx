@@ -14,7 +14,8 @@ export function LoginPage() {
                 justifyContent: "flex-start",
                 alignItems: "center",
                 backgroundColor: "white",
-                height: "100%"
+                height: "100%",
+                boxShadow: "0 0 47px 8px rgb(43,43,43,1)"
             }}>
                 <Box sx={{
                     display: "grid",

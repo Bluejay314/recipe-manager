@@ -65,17 +65,10 @@ export function SignInForm() {
     };
 
     return (
-        <Container component="main">
+        <Container component="main" maxWidth="sm">
             <CssBaseline />
-            <Box
-                sx={{
-                    marginTop: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
-                <Typography component="h1" variant="h5">
+            <Box mt={2} px={4}>
+                <Typography component="h1" variant="h5" textAlign="center">
                     Log in
                 </Typography>
                 <Box
@@ -122,7 +115,7 @@ export function SignInForm() {
                         </Button>
                         <Box>
                             Don't have an account?
-                            <Link href="/account/signup" variant="body2">
+                            <Link href="/account/register" variant="body2">
                                 {" Sign Up"}
                             </Link>
                         </Box>

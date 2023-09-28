@@ -9,13 +9,13 @@ import {
 } from "@mui/material";
 import { Logo } from "@/components";
 import { useState } from "react";
+import { useUserContext } from "@/context/UserContext";
 
 const settings = ["Profile", "Logout"];
 
 export function Header() {
-    /*
-      User menu is not shown if this object is null (use useRef?)
-    */
+    const { currentUser } = useUserContext();
+
     const [anchorElUser, setAnchorElUser] = useState(null);
 
     const handleOpenUserMenu = (event) => {
@@ -57,7 +57,7 @@ export function Header() {
                 alignItems="center"
                 gap="1em"
             >
-                <Typography variant="subtitle1">UserName</Typography>
+                <Typography variant="subtitle1">{currentUser.userName? currentUser.userName : "userName"}</Typography>
                 {/* Defines user avatar, menu opening, and tooltip */}
                 <Tooltip title="Options">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

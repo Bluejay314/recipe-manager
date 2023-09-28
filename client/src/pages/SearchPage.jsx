@@ -27,15 +27,25 @@ export function SearchPage({ items }) {
                     <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
                     <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
                 </Grid>
-
+                <Grid item px={4} sm>
+                    <Box sx={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                        gap: "2em"
+                    }}>
+                        {items.map((item) => (<RecipeCard recipe={item}/>))}
+                    </Box>
+                </Grid>
+                
+{/* 
                 <Grid item container  sm gap={2} justifyContent="center">
                     {items.map((item) => (
-                        <Grid item key={item.id} xs={12} sm={6} lg={4} xl={3}>
+                        <Grid item key={item.id} xs={12} sm={6} lg={3} xl={2}>
                             <RecipeCard recipe={item}/>
                         </Grid>
                     ))}
-                </Grid>
-                </Grid>
+                </Grid> */}
+            </Grid>
         </Page>
         
     );

@@ -1,8 +1,8 @@
 "use strict";
 
-const express = require("express");
 const bcrypt = require("bcrypt");
 let { User } = require("../models");
+const { createToken } = require("../middleware/auth");
 
 const getUser = async (req, res) => {
     try {
@@ -22,6 +22,47 @@ const createUser = async (data, res) => {
         res.send({ result: 500, error: err.message })
     }
 };
+
+const registerUser = async (req, res) => {
+    try {
+        const {userName, email, password} = req.body;
+
+        if (!(email && password && userName)) {
+            res.status(400).json({ result: "All input is required"});
+            return;
+        }
+        
+        // if(userExists(email)) {
+        //     res.status(409).json({ result: "User already exists. boop Please login" });
+        //     return;
+        // }
+
+        let encryptedPassword = await bcrypt.hash(password, 10);
+
+        const user = new User({
+            userName,
+            email: email.toLowerCase(),
+            password: encryptedPassword,
+        });
+
+        const token = createToken(user._id, email);
+        user.token = token;
+
+        await user.save();
+
+        res.status(201).json({ result: "User successfully registered", data: user });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ result: "somethin went wrong man!" })
+    }
+}
+
+async function userExists(email) {
+    // const oldUser = await User.findOne({ "email": email});
+    // if (oldUser) return true;
+
+    return false;
+}
 
 const updateUser = async (req, res) => {
     try {
@@ -52,6 +93,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
     getUser,
+    registerUser,
     createUser,
     updateUser,
     deleteUser

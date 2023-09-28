@@ -1,4 +1,4 @@
-export { CreateAccountForm } from "./CreateAccountForm"
+export { RegisterForm } from "./RegisterForm"
 export { CollapsableMenu } from "./CallapsableMenu"
 export { RecipeCard } from "./RecipeCard";
 export { Header } from "./Header"

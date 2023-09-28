@@ -3,11 +3,14 @@ import { ErrorPage, SearchPage } from "@/pages";
 import "./App.css";
 import AppRoutes from "./routes/AppRoutes";
 import recipes from "./data/allrecipes"
+import { UserProvider } from "./context/UserContext";
 
 export default function App() {
     return (
 		<ErrorBoundary FallbackComponent={ErrorPage}>
-			<AppRoutes items={recipes}/>
+			<UserProvider>
+				<AppRoutes items={recipes}/>
+			</UserProvider>
 		</ErrorBoundary>
 	);
 }
