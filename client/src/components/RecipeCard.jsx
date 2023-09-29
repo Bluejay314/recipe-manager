@@ -50,7 +50,10 @@ export function RecipeCard({ recipe }) {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                "&.MuiCardContent-root": {
+                    paddingBottom: 0,
+                }
             }}>
                 <Typography
                     variant="subtitle1"
