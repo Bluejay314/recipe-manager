@@ -1,66 +1,70 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useUserContext } from "@/context/UserContext";
+import axios from "axios";
+import { validateEmail, validatePassword } from "@/util/validation";
 
-const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-const validateEmail = (email) => {
-    if(email.length < 1)
-        return [false, "An email is required"];
-    if(!emailRegex.test(email))
-        return [false, "Email failed regular expression match"];
-
-    return [true, ""]
+const EmailInput = ({ state }) => {
+    return (
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            error={!state.isValid}
+            helperText={state.message}
+        />
+    )
 }
 
-const validatePassword = (password) => {
-    if(password.length < 1)
-        return [false, "A password is required"];
-    if(password.length < 5)
-        return [false, "Password must contain at least 5 letters"];
-
-    return [true, ""]
-}
-
-export function SignInForm() {
-    const [emailState, setEmailState] = useState({
-        isValid:true,
-        message: ""
-    });
-
-    const [passwordState, setPasswordState] = useState({
-        isValid:true,
-        message: ""
-    });
-
+export function LoginForm() {
+    const { currentUser, handleUpdateUser } = useUserContext();
+    const [emailState, setEmailState] = useState({isValid: true, message: ""});
+    const [passwordState, setPasswordState] = useState({isValid: true, message: ""});
+    const [loginMessage, setLoginMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        const userData = new FormData(event.currentTarget);
+        const email = userData.get('email');
+        const password = userData.get('password');
 
-        const [emailValid, emailMessage] = validateEmail(data.get('email'));
+        const [emailValid, emailMessage] = validateEmail(email);
         setEmailState({isValid: emailValid, message: emailMessage});
 
-        const [passwordValid, passwordMessage] = validatePassword(data.get('password'));
+        const [passwordValid, passwordMessage] = validatePassword(password);
         setPasswordState({isValid: passwordValid, message: passwordMessage})
-        console.log({
-            email:(emailState.isValid && emailState.message.length > 0),
-            pass: (passwordState.isValid && emailState.message.length > 0)
-        })
 
         if(emailValid  && passwordValid) {
-            navigate("/");
+            try {
+                let response = await axios.post('http://localhost:3010/user/login', {
+                    email: email, 
+                    password: password
+                });
+
+                loggedInUser = response.data.data;
+                console.log(loggedInUser)
+                handleUpdateUser(userData)
+                navigate("/search");
+    
+            } catch (err) {
+                console.log(err.message)
+                setLoginMessage(err.response.data.result);
+            }
         }
     };
 
@@ -68,7 +72,7 @@ export function SignInForm() {
         <Container component="main" maxWidth="sm">
             <CssBaseline />
             <Box mt={2} px={4}>
-                <Typography component="h1" variant="h5" textAlign="center">
+                <Typography component="h1" variant="h4" textAlign="center">
                     Log in
                 </Typography>
                 <Box
@@ -76,18 +80,7 @@ export function SignInForm() {
                     onSubmit={handleSubmit}
                     sx={{ mt: 1, px: "2em" }}
                 >
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        error={!emailState.isValid}
-                        helperText={emailState.message}
-                    />
+                    <EmailInput state={emailState}/>
                     <TextField
                         margin="normal"
                         required
@@ -106,6 +99,9 @@ export function SignInForm() {
                         </Link>
                     </Grid>
                     <Box display="flex" flexDirection="column" alignItems="center">
+                        <Typography variant="h6" color="red" pt={2}>
+                            {loginMessage}
+                        </Typography>
                         <Button
                             type="submit"
                             variant="contained"
