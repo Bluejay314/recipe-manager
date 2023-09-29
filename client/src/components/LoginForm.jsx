@@ -56,14 +56,15 @@ export function LoginForm() {
                     password: password
                 });
 
-                loggedInUser = response.data.data;
+                const loggedInUser = response.data.data;
                 console.log(loggedInUser)
                 handleUpdateUser(userData)
                 navigate("/search");
+                setLoginMessage("");
     
             } catch (err) {
                 console.log(err.message)
-                setLoginMessage(err.response.data.result);
+                setLoginMessage(err.response? err.response.data.result : "");
             }
         }
     };
