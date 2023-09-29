@@ -1,4 +1,4 @@
-import { RegisterForm, SignInForm } from "@/components";
+import { RegisterForm, LoginForm } from "@/components";
 import { HomePage, LoginPage, RecipePage, SearchPage } from "@/pages";
 import { Routes, Route } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function AppRoutes(props) {
             <Route path="search" element={<SearchPage {...props} />} />
             <Route path="recipes" element={<RecipePage />} />
             <Route path="account" element={<LoginPage />}>
-                <Route path="login" element={<SignInForm />} />
+                <Route path="login" element={<LoginForm />} />
                 <Route path="register" element={<RegisterForm />} />
             </Route>
         </Routes>
