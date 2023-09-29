@@ -13,16 +13,6 @@ const getUser = async (req, res) => {
     }
 }
 
-const createUser = async (data, res) => {
-    try {
-        const hash = await bcrypt.hash(data.password, 10);
-        await new User({...data, password: hash}).save();
-        res.send({ result: 200, data: data });
-    } catch(err) {
-        res.send({ result: 500, error: err.message })
-    }
-};
-
 const registerUser = async (req, res) => {
     try {
         const {userName, email, password} = req.body;
@@ -31,37 +21,54 @@ const registerUser = async (req, res) => {
             res.status(400).json({ result: "All input is required"});
             return;
         }
-        
-        // if(userExists(email)) {
-        //     res.status(409).json({ result: "User already exists. boop Please login" });
-        //     return;
-        // }
 
-        let encryptedPassword = await bcrypt.hash(password, 10);
+        const oldUser = await User.findOne({ "email": email});
+        if (oldUser) {
+            res.status(409).json({ result: "User already exists. Please login" });
+            return;
+        }
 
-        const user = new User({
+        const formattedEmail = email.toLowerCase();
+        const encryptedPassword = await bcrypt.hash(password, 10);
+        const userData = {
             userName,
-            email: email.toLowerCase(),
-            password: encryptedPassword,
-        });
+            email: formattedEmail,
+            password: encryptedPassword
+        }
 
-        const token = createToken(user._id, email);
-        user.token = token;
+        const user = await new User(userData).save();
+        userData.token = createToken(user._id, email);
+        
 
-        await user.save();
-
-        res.status(201).json({ result: "User successfully registered", data: user });
+        res.status(201).json({ result: "User successfully registered", data: userData });
     } catch (err) {
         console.log(err);
         res.status(500).json({ result: "somethin went wrong man!" })
     }
 }
 
-async function userExists(email) {
-    // const oldUser = await User.findOne({ "email": email});
-    // if (oldUser) return true;
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-    return false;
+        if (!(email && password)) {
+            res.status(400).json({ result: "All input is required" });
+            return;
+        }
+
+        const user = await User.findOne({ "email": email});
+
+        if (user && (await bcrypt.compare(password, user.password))) {
+            const token = createToken(user.id, email);
+            user.token = token;
+
+            res.status(200).json({ result: 'User successfully logged in', data: user });
+        }
+        else res.status(400).json({ result: "Either the email or password was incorrect" });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ result: err.message })
+    }
 }
 
 const updateUser = async (req, res) => {
@@ -94,7 +101,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
     getUser,
     registerUser,
-    createUser,
+    loginUser,
     updateUser,
     deleteUser
 };
