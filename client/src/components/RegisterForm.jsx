@@ -20,19 +20,18 @@ export function RegisterForm() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        axios.post('http://localhost:3010/user', Object.fromEntries(data.entries()))
+        axios.post('http://localhost:3010/user/register', Object.fromEntries(data.entries()))
         .then(response => {
             let res = response.data.result;
             let user = response.data.data;
 
             setResult(res);
             if (user) {
-                console.log("updating user")
                 handleUpdateUser(user);
-                navigate('/recipes');
+                navigate('/search');
             }
         }).catch(err => {
-            console.log(err)
+            console.log(err.message)
             setResult(err.message);
         });
     };
@@ -41,7 +40,7 @@ export function RegisterForm() {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box>
-                <Typography component="h1" variant="h5" textAlign="center">
+                <Typography component="h1" variant="h4" textAlign="center">
                     Sign up
                 </Typography>
                 <Box

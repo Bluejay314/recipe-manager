@@ -36,15 +36,6 @@ export function SearchPage({ items }) {
                         {items.map((item) => (<RecipeCard recipe={item}/>))}
                     </Box>
                 </Grid>
-                
-{/* 
-                <Grid item container  sm gap={2} justifyContent="center">
-                    {items.map((item) => (
-                        <Grid item key={item.id} xs={12} sm={6} lg={3} xl={2}>
-                            <RecipeCard recipe={item}/>
-                        </Grid>
-                    ))}
-                </Grid> */}
             </Grid>
         </Page>
         

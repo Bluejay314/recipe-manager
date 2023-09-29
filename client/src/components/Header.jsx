@@ -26,6 +26,10 @@ export function Header() {
         setAnchorElUser(null);
     };
 
+    const handleLogOut = () => {
+        handleCloseUserMenu();
+    }
+
     const settingsItems = settings.map((setting) => (
         <MenuItem key={setting} onClick={handleCloseUserMenu}>
             <Typography textAlign="center">
@@ -58,10 +62,9 @@ export function Header() {
                 gap="1em"
             >
                 <Typography variant="subtitle1">{currentUser.userName? currentUser.userName : "userName"}</Typography>
-                {/* Defines user avatar, menu opening, and tooltip */}
                 <Tooltip title="Options">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <Avatar src="/static/images/avatar/2.jpg"/>
+                        <Avatar />
                     </IconButton>
                 </Tooltip>
 
@@ -81,7 +84,11 @@ export function Header() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                 >
-                    {settingsItems}
+                    <MenuItem key="logout" onClick={handleLogOut}>
+                        <Typography textAlign="center">
+                            logout
+                        </Typography>
+                    </MenuItem>
                 </Menu>
             </Box>
         </Box>
