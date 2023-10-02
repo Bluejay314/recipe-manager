@@ -58,8 +58,8 @@ export function LoginForm() {
 
                 const loggedInUser = response.data.data;
                 console.log(loggedInUser)
-                handleUpdateUser(userData)
-                navigate("/search");
+                handleUpdateUser(loggedInUser)
+                navigate("/user/search");
                 setLoginMessage("");
     
             } catch (err) {
