@@ -6,7 +6,6 @@ const userSchema = new Schema({
     userName: {type: String, trim: true, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    recipes: {type: [mongoose.Schema.Types.ObjectId], ref: "recipe"},
 
     createdAt: { type: Date, default: Date.now},
     updatedAt: { type: Date, default: Date.now},
