@@ -9,20 +9,17 @@ import {
     Tooltip,
     Typography,
 } from "@mui/material";
-import { Logo } from "@/components";
+import { Logo, SearchBar } from "@/components";
 import { useState } from "react";
 import { useUserContext } from "@/context/UserContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 import RecipeStepper from "./recipeBuilder/RecipeStepper";
+import RecipeMenu from "./RecipeMenu";
 
 const settings = ["Profile", "Logout"];
 
-const pages = [
-    {label: "Home", link: "/"},
-    {label: "Recipes", link: "/user/search"}];
-
-export function Header() {
+export function Header({ children }) {
     const { currentUser, handleUpdateUser } = useUserContext();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -60,24 +57,21 @@ export function Header() {
     return (
         <Box
             display="flex"
-            justifyContent="space-between"
+            justifyContent={"center"}
             alignItems="center"
             minHeight="10vh"
-            px={12}
             color="white"
-            sx={{backgroundColor: "rgb(30,100,200)"}}
+            sx={{
+                px: {md: "2em", xl: "4em"},
+                backgroundColor: "rgb(245, 144, 66)"
+            }}
         >
-            <Box display="flex" alignItems="center">
-                <img src="/src/assets/logo.png" height="100vh"/>
-                <Logo content="CULINARY COMPOSER" variant="h5" />
-            </Box>
+            {children}
+            <img src="/src/assets/logo.png" height="100vh"/>
+            <Logo content="CULINARY COMPANION" variant="h5"/>
+            <SearchBar/>
 
-            <Box sx={{display: { xs: "none", md: "flex" }}}>
-                {pages.map((page) => (
-                    <MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>
-                ))}
-                <MenuItem component={"div"} onClick={() => setModalOpen(true)}>New</MenuItem>
-            </Box>
+            <Box flexGrow={1}></Box>
             
             <Box 
                 display="flex" 
@@ -86,43 +80,10 @@ export function Header() {
             >
                 <Typography variant="subtitle1">{currentUser.userName? currentUser.userName : "userName"}</Typography>
                 <Tooltip title="Options">
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <IconButton onClick={handleOpenUserMenu}>
                         <Avatar />
                     </IconButton>
                 </Tooltip>
-
-                {/* This content defines the menu for smaller screens */}
-                <Box sx={{display: { xs: "flex", md: "none" }}}>
-                        <IconButton
-                            size="large"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                        <MenuIcon />
-                        </IconButton>
-
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "left",
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "left",
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: "block", md: "none" },
-                            }}
-                        >
-                            {pages.map((page) => (<MenuItem key={page.link} component={NavLink} to={page.link}>{page.label}</MenuItem>))}
-                        </Menu>
-                    </Box>
-
                 <Menu
                     sx={{ mt: "45px" }}
                     id="menu-appbar"
@@ -146,25 +107,26 @@ export function Header() {
                     </MenuItem>
                 </Menu>
             </Box>
-
-            <Modal
-                open={modalOpen}
-                onClose={() => setModalOpen(false)}
-            >
-                <Box sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 600,
-                    bgcolor: 'background.paper',
-                    border: '2px solid #000',
-                    boxShadow: 24,
-                    p: 4,
-                    }}>
+                   
+                <Modal
+                    open={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                >
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: {xs: "100%", md: "600px"},
+                        height: {xs: "70%"},
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        p: 4,
+                        }}>
                         <RecipeStepper />
-                </Box>
-            </Modal>
+                    </Box>
+                </Modal>    
         </Box>
     );
 }
