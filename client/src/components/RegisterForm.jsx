@@ -31,7 +31,6 @@ export function RegisterForm() {
                 navigate('/search');
             }
         }).catch(err => {
-            console.log(err.message)
             setResult(err.message);
         });
     };

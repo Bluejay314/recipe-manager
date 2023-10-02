@@ -57,13 +57,11 @@ export function LoginForm() {
                 });
 
                 const loggedInUser = response.data.data;
-                console.log(loggedInUser)
                 handleUpdateUser(loggedInUser)
                 navigate("/user/search");
                 setLoginMessage("");
     
             } catch (err) {
-                console.log(err.message)
                 setLoginMessage(err.response? err.response.data.result : "");
             }
         }

@@ -2,8 +2,6 @@ import { Page } from "@/pages";
 import { Box } from "@mui/material";
 
 export function ErrorPage({ error, resetErrorBoundary }) {
-    console.error(error);
-
     return (
         <Page>
             <Box>

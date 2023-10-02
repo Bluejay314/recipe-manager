@@ -27,8 +27,6 @@ export function Header() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
-
-    console.log(currentUser);
     
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);

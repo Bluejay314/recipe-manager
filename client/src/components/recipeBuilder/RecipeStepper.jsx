@@ -9,9 +9,10 @@ import { TextField } from '@mui/material';
 import { Label } from '@mui/icons-material';
 import { useDropzone } from 'react-dropzone';
 import RecipeDetailsForm from './RecipeDetailsForm';
+import TagForm from './TagForm';
 
 
-const steps = ['Recipe Details', 'Final'];
+const steps = ['Recipe Details', 'Tags', 'Final'];
 
 export default function RecipeStepper() {
     const [activeStep, setActiveStep] = useState(0);
@@ -20,6 +21,10 @@ export default function RecipeStepper() {
     const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
     const handleReset = () => setActiveStep(0);
+
+    let activeElement = <></>;
+    if(activeStep === 0) activeElement = <RecipeDetailsForm />
+    else if(activeStep === 1) activeElement = <TagForm />
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -46,9 +51,9 @@ export default function RecipeStepper() {
                         Step {activeStep + 1}
                     </Typography>
 
-                    {activeStep === 0 && <RecipeDetailsForm />}
+                    {activeElement}
 
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                    <Box sx={{ display: "flex", justifyContent: "flex-end", pt: 2 }}>
                         <Button color="inherit" disabled={activeStep === 0} onClick={handleBack}>
                             Back
                         </Button>
