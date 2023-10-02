@@ -18,7 +18,7 @@ export function RecipeCard({ recipe }) {
 
     const handleOpen = (event) => {
         event.preventDefault();
-        navigate(`/recipes?q=${recipe.id}`)
+        navigate(`/user/recipes?q=${recipe.id}`)
     }
 
     return (
