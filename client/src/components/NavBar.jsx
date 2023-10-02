@@ -12,21 +12,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { SearchBar } from ".";
 import { NavLink } from "react-router-dom";
 
-const pages = [
-    {label: "Home", link: "/"},
-    {label: "Settings", link: "/settings"},
-    {label: "Recipes", link: "/search"}];
+function NavBar() {
+    
 
-export function NavBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+   
 
     return (
         <AppBar position="static">
