@@ -60,7 +60,7 @@ export function CollapsableMenu({ title, labels }) {
                     <Typography>{camelCase(title)}</Typography>
                 </AccordionSummary>
                 {labels.map(item => (
-                    <AccordionDetails key={item.id}>
+                    <AccordionDetails key={item}>
                         <Typography>{camelCase(item)}</Typography>
                     </AccordionDetails>
                 ))}
