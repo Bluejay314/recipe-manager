@@ -4,15 +4,6 @@ const bcrypt = require("bcrypt");
 let { User } = require("../models");
 const { createToken } = require("../middleware/auth");
 
-const getUser = async (req, res) => {
-    try {
-        const data = await User.findById(req.params.id);
-        res.send({ result: 200, data: data })
-    } catch(err) {
-        res.send({ result: 500, error: err.message })
-    }
-}
-
 const registerUser = async (req, res) => {
     try {
         const {userName, email, password} = req.body;
@@ -31,14 +22,14 @@ const registerUser = async (req, res) => {
         const formattedEmail = email.toLowerCase();
         const encryptedPassword = await bcrypt.hash(password, 10);
         const userData = {
-            userName,
+            userName: userName,
             email: formattedEmail,
             password: encryptedPassword
         }
 
         const user = await new User(userData).save();
-        userData.token = createToken(user._id, email);
-        
+        userData.id = user._id;
+        userData.token = createToken(user._id, formattedEmail);        
 
         res.status(201).json({ result: "User successfully registered", data: userData });
     } catch (err) {
@@ -60,9 +51,14 @@ const loginUser = async (req, res) => {
 
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = createToken(user.id, email);
-            user.token = token;
-            console.log(`user: ${user}`)
-            res.status(200).json({ result: 'User successfully logged in', data: {...user._doc, token: token} });
+
+            const toSend = {
+                id: user._id,
+                userName: user.userName,
+                token: token
+            }
+            console.log(toSend);
+            res.status(200).json({ result: 'User successfully logged in', data: toSend});
         }
         else res.status(400).json({ result: "Either the email or password was incorrect" });
     } catch (err) {
@@ -99,7 +95,6 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-    getUser,
     registerUser,
     loginUser,
     updateUser,
