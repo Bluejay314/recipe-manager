@@ -1,6 +1,7 @@
 /* 'Raleway' 200, 800 */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;800&display=swap');
-
+/* 'Ultra', serif 400 */
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
