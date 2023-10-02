@@ -2,22 +2,24 @@
 
 let { Recipe } = require("../models");
 
-const getRecipes = (res) => {
-    Recipe.find({})
-        .then((data) => res.send({ result: 200, data: data }))
-        .catch((err) => res.send({ result: 500, error: err.message }));
+const getRecipe = async (req, res) => {
+    try {
+        const recipe = await Recipe.findById(req.params.id);
+        res.send({ result: 200, data: recipe });
+    }
+    catch(err) {
+        res.send({ result: 500, error: err.message })
+    }
 };
 
-const getRecipe = (req, res) => {
-    Recipe.findById(req.params.id)
-        .then((data) => res.send({ result: 200, data: data }))
-        .catch((err) => res.send({ result: 500, error: err.message }));
-};
-
-const createRecipe = (data, res) => {
-    new Recipe(data).save()
-        .then((data) => res.send({ result: 200, data: data }))
-        .catch((err) => res.send({ result: 500, error: err.message }));
+const createRecipe = async (data, res) => {
+    try {
+        const recipe = await new Recipe(data).save();
+        res.send({ result: 200, data: recipe });
+    }
+    catch(err) {
+        res.send({ result: 500, error: err.message });
+    }
 };
 
 const updateRecipe = (req, res) => {
@@ -27,6 +29,21 @@ const updateRecipe = (req, res) => {
         .then((data) => res.send({ result: 200, data: data }))
         .catch((err) => res.send({ result: 500, error: err.message }));
 };
+
+const createRecipeImage = (req, res) => {
+    const userUpdates = { 
+        image: '/images/' + req.file.filename
+    };
+
+    console.log(userUpdates);
+
+    User.findByIdAndUpdate(req.params.userId, userUpdates)
+        .then(() => 
+            res.status(200).json({ result: 'Image uploaded to profile successfully', data: userUpdates }))
+        .catch(err => 
+            res.status(500).json({ result: err.message })
+    )
+}
 
 const deleteRecipe = (req, res) => {
     Recipe.findByIdAndRemove(req.params.id, req.body, {
@@ -38,7 +55,7 @@ const deleteRecipe = (req, res) => {
 
 module.exports = {
     getRecipe,
-    getRecipes,
+    createRecipeImage,
     createRecipe,
     updateRecipe,
     deleteRecipe
