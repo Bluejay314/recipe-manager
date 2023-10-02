@@ -1,13 +1,13 @@
-import { Header, NavBar } from "@/components";
+import { Header } from "@/components";
 import { Box, Container } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 export function Page({ children }) {
     return (
         <Box>
             <Header />
-            <NavBar />
             <Container maxWidth="xl">
-                {children}
+                <Outlet />
             </Container>
         </Box>
     )

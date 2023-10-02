@@ -61,8 +61,8 @@ const loginUser = async (req, res) => {
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = createToken(user.id, email);
             user.token = token;
-
-            res.status(200).json({ result: 'User successfully logged in', data: user });
+            console.log(`user: ${user}`)
+            res.status(200).json({ result: 'User successfully logged in', data: {...user._doc, token: token} });
         }
         else res.status(400).json({ result: "Either the email or password was incorrect" });
     } catch (err) {

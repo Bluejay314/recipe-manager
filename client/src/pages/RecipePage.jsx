@@ -32,49 +32,47 @@ export function RecipePage() {
     ));
 
     return (
-        <Page>
-            <Grid container p={4}>
-                <Grid item md={3} sx={{display: { sm: "none", md: "block" }}}>
-                    <Box>
-                        <CollapsableMenu title={defaultOptions.title} labels={defaultOptions.labels} />
+        <Grid container p={4}>
+            <Grid item md={3} sx={{display: { sm: "none", md: "block" }}}>
+                <Box>
+                    <CollapsableMenu title={defaultOptions.title} labels={defaultOptions.labels} />
+                </Box>
+            </Grid>
+
+            <Grid item container md pl={4}>
+                {/* Image Section */}
+                <Grid item  pb={6} sm={12} md={5}>
+                    <img src={recipe.image} />
+                </Grid>
+
+                {/* Header Section */}
+                <Grid item pl={4} pb={6} sm={12} md={7} >
+                    <Typography variant="h4" pb={4} maxHeight="60%" overflow="hidden">
+                        {recipe.title}
+                    </Typography>
+                    <Typography variant="body1">{recipe.description}</Typography>
+                </Grid>
+
+                {/* Ingredients Section */}
+                <Grid item sm={12} md>
+                    <Typography variant="h5" fontWeight="bold" pb={2}>
+                        Ingredients
+                    </Typography>
+                    <Box display="flex" flexDirection="column" gap={2}>
+                        {ingredients}
                     </Box>
                 </Grid>
 
-                <Grid item container md pl={4}>
-                    {/* Image Section */}
-                    <Grid item  pb={6} sm={12} md={5}>
-                        <img src={recipe.image} />
-                    </Grid>
-
-                    {/* Header Section */}
-                    <Grid item pl={4} pb={6} sm={12} md={7} >
-                        <Typography variant="h4" pb={4} maxHeight="60%" overflow="hidden">
-                            {recipe.title}
-                        </Typography>
-                        <Typography variant="body1">{recipe.description}</Typography>
-                    </Grid>
-
-                    {/* Ingredients Section */}
-                    <Grid item sm={12} md>
-                        <Typography variant="h5" fontWeight="bold" pb={2}>
-                            Ingredients
-                        </Typography>
-                        <Box display="flex" flexDirection="column" gap={2}>
-                            {ingredients}
-                        </Box>
-                    </Grid>
-
-                    {/* Method Section */}
-                    <Grid item sm={12} md>
-                        <Typography variant="h5" fontWeight="bold" pb={2}>
-                            Method
-                        </Typography>
-                        <Typography variant="body1">
-                            {steps}
-                        </Typography>
-                    </Grid>
+                {/* Method Section */}
+                <Grid item sm={12} md>
+                    <Typography variant="h5" fontWeight="bold" pb={2}>
+                        Method
+                    </Typography>
+                    <Typography variant="body1">
+                        {steps}
+                    </Typography>
                 </Grid>
             </Grid>
-        </Page>
+        </Grid>
     );
 }

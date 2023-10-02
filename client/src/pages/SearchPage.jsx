@@ -19,8 +19,6 @@ export function SearchPage({ items }) {
     const searchQuery = query.get("q")? query.get("q") : "";
 
     return (
-        <Page>
-            
             <Grid container py={4}>
                 <Grid item sm={3}>
                     <Searcher />
@@ -37,7 +35,5 @@ export function SearchPage({ items }) {
                     </Box>
                 </Grid>
             </Grid>
-        </Page>
-        
     );
 }
