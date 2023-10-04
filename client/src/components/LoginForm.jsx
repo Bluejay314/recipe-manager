@@ -58,7 +58,7 @@ export function LoginForm() {
 
                 const loggedInUser = response.data.data;
                 handleUpdateUser(loggedInUser)
-                navigate("/user/search");
+                navigate("/");
                 setLoginMessage("");
     
             } catch (err) {
