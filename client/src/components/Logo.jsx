@@ -8,12 +8,12 @@ export function Logo({ content, variant }) {
         href="/"
         sx={{
           mr: 2,
-          display: { xs: 'none', md: 'flex' },
+          display: { xs: 'none', md: 'block' },
           fontFamily: 'Ultra',
           fontWeight: 400,
           letterSpacing: '.4rem',
-          color: "rgb(64,64,64)",
-          textShadow: "0px 0px 4px rgb(200,100,100)",
+          color: "rgb(255, 255, 255)",
+          textShadow: "0 0 4px rgb(0,0,0)",
           textDecoration: 'none',
         }}
       >
