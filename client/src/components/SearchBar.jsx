@@ -7,6 +7,9 @@ import { Box, MenuItem } from "@mui/material";
 
 const Search = styled("form")(({ theme }) => ({
     position: "relative",
+    minWidth: "20ch",
+    maxWidth: "40ch",
+    width: "100%",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -28,13 +31,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     "& .MuiInputBase-input": {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("md")]: {
-            width: "30ch",
-        },
+        width: "30ch",
     },
 }));
 
@@ -52,7 +50,7 @@ export function SearchBar() {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <Box sx={{display: { xs: "none", sm: "flex" }}}>
+            <Box sx={{display: { sm: "none", md: "flex" }}}>
                 <StyledInputBase
                     placeholder="Search…"
                     value={query}
