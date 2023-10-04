@@ -5,7 +5,7 @@ export function LoginPage() {
     return (
         <Box sx={{
             height: "100%",
-            backgroundColor: "rgb(70,95, 125)"
+            backgroundColor: "rgb(47, 94, 128)"
         }}>
             <Container maxWidth="md" sx={{
                 position: "relative",
@@ -15,7 +15,7 @@ export function LoginPage() {
                 alignItems: "center",
                 backgroundColor: "white",
                 height: "100%",
-                boxShadow: "0 0 47px 8px rgb(43,43,43,1)"
+                boxShadow: "0 0 10px 2px rgba(0, 0, 0, 0.8)"
             }}>
                 <Box sx={{
                     display: "grid",
