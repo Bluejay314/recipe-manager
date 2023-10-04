@@ -14,28 +14,29 @@ import { useRecipeBuildContext } from '@/context/RecipeBuildContext';
 import axios from 'axios';
 import { useUserContext } from '@/context/UserContext';
 
-const steps = ['Recipe Details', 'Tags', 'Final'];
+const steps = ['Recipe Details', 'Add an Image', 'Final'];
 
 export default function RecipeStepper() {
     const { currentUser } = useUserContext();
-    const { recipe } = useRecipeBuildContext();
+    const { recipe, resetRecipe, getFormData } = useRecipeBuildContext();
     const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
     const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    const handleReset = () => setActiveStep(0);
+    const handleReset = () => {
+        resetRecipe();
+        setActiveStep(0);
+    }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const formData = new FormData();
-            formData.append("user", currentUser.id);
-            formData.append("title", recipe.title);
-            formData.append("description", recipe.description)
-            formData.append("file", recipe.image);
+            console.log(`recipe tags: ${recipe.tags} type: ${typeof recipe.tags}`);
+            console.log(`recipe tags split: ${recipe.tags.split(",")} type: ${typeof recipe["tags"].split(",")}`)
+            const formData = getFormData();
 
             const response = await axios.post(`http://localhost:3010/recipes/${currentUser.id}`, formData) 
             console.log(response.data);
@@ -64,6 +65,7 @@ export default function RecipeStepper() {
                         </Step>
                     ))}
                 </Stepper>
+                <Typography variant='h6'>{steps[activeStep]}</Typography>
                 {activeStep === steps.length ? (
                     <Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }}>
@@ -75,8 +77,7 @@ export default function RecipeStepper() {
                         </Box>
                     </Fragment>
                 ) : (
-                    <Fragment>
-
+                    <Fragment>                            
                         {activeElement}
 
                         <Box sx={{ display: "flex", justifyContent: "flex-end", pt: 2 }}>
