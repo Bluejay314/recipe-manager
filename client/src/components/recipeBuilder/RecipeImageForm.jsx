@@ -14,7 +14,7 @@ export default function RecipeImageForm() {
     return (
         <Box px={"1em"} display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap=".5em">
             <CssBaseline />
-            <Box ml="10%"><input name="image" type="file" onChange={handleImageChange} /></Box>
+            <Box ml="10%"><input name="file" type="file" onChange={handleImageChange} /></Box>
             {previewImage && (<img src={previewImage} width="100" height="100" />)}
         </Box>
     );
