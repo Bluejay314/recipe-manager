@@ -18,7 +18,7 @@ export function RecipeCard({ recipe }) {
 
     const handleOpen = (event) => {
         event.preventDefault();
-        navigate(`/user/recipes?q=${recipe.id}`)
+        navigate(`/user/recipes?q=${recipe._id}`)
     }
 
     return (
@@ -26,23 +26,8 @@ export function RecipeCard({ recipe }) {
             <Box position="relative">
                 <CardActionArea onClick={handleOpen}>
                     <CardMedia
-                        component="img"
-                        alt={recipe.title}
-                        width="100%"
-                        image={recipe.image}
-                        sx={{aspectRatio: 1.5}}
+                        
                     />
-                    <Box
-                        position="absolute"
-                        sx={{
-                            inset: "auto 0 0 0",
-                            backgroundColor: "rgb(255,255,255, 0.6)",
-                        }}
-                    >
-                        <Typography variant="subtitle1" fontWeight={600}>
-                            Food
-                        </Typography>
-                    </Box>
                 </CardActionArea>
             </Box>
 
@@ -51,9 +36,6 @@ export function RecipeCard({ recipe }) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                "&.MuiCardContent-root": {
-                    paddingBottom: 0,
-                }
             }}>
                 <Typography
                     variant="subtitle1"
@@ -64,23 +46,7 @@ export function RecipeCard({ recipe }) {
                 >
                     {recipe.title}
                 </Typography>
-                <IconButton
-                    onClick={handleExpandClick}
-                    sx={{
-                        width: "fit-content",
-                        height: "auto",
-                        transform: !expanded? "rotate(0deg)" : "rotate(180deg)",
-                        transition: "ease",
-                    }}
-                >
-                    <ExpandMoreIcon/>
-                </IconButton>
             </CardContent>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <Typography variant="body1" fontStyle="italic" color="text.secondary">
-                    {recipe.description}
-                </Typography>
-            </Collapse>
         </Card>
     );
 }
