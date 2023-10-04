@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
                 userName: user.userName,
                 token: token
             }
-            console.log(toSend);
+            
             res.status(200).json({ result: 'User successfully logged in', data: toSend});
         }
         else res.status(400).json({ result: "Either the email or password was incorrect" });
