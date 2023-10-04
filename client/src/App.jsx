@@ -10,9 +10,7 @@ export default function App() {
     return (
 		<ErrorBoundary FallbackComponent={ErrorPage}>
 			<UserProvider>
-				<RecipeBuildProvider>
 					<AppRoutes items={recipes}/>
-				</RecipeBuildProvider>
 			</UserProvider>
 		</ErrorBoundary>
 	);
