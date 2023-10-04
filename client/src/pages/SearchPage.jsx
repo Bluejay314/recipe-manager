@@ -1,39 +1,38 @@
-import * as React from "react";
 import { Box, Grid } from "@mui/material";
-import { CollapsableMenu, RecipeCard } from "@/components";
-import { Page } from "@/pages";
-import useQuery from "@/hooks/useQuery";
-import { Searcher } from "@/components/Searcher";
+import { CollapsableMenu, Header, RecipeCard } from "@/components";
+import axios from "axios";
+import { useUserContext } from "@/context/UserContext";
+import { useEffect, useState } from "react";
 
-const defaultCategories = {
-    title: "categories",
-    labels: ["entree", "breakfast", "dinner", "dessert", "snack"]
-};
-const defaultTags = {
-    title: "tags",
-    labels: ["beef", "chicken", "pork", "sweet", "savoury", "salty", "sour", "drink", "food"]
-};
 
-export function SearchPage({ items }) {
-    const query = useQuery();
-    const searchQuery = query.get("q")? query.get("q") : "";
 
+export function SearchPage() {
+    const [recipes, setRecipes] = useState([]);
+    const { currentUser } = useUserContext();
+    const headers = { "x-access-token": currentUser.token }
+
+    useEffect(() => {
+        axios.get(`http://localhost:3010/recipes/all/${currentUser.id}`, {headers: headers})
+            .then(response => setRecipes(response.data.data))
+            .catch(err => console.log(err.message))
+    },[])
+
+
+    
     return (
+        <Box>
+            <Header />
             <Grid container py={4}>
-                <Grid item sm={3}>
-                    <Searcher />
-                    <CollapsableMenu title={defaultCategories.title} labels={defaultCategories.labels} />
-                    <CollapsableMenu title={defaultTags.title} labels={defaultTags.labels} />
-                </Grid>
                 <Grid item px={4} sm>
                     <Box sx={{
                         display: "grid",
                         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                         gap: "2em"
                     }}>
-                        {items.map((item) => (<RecipeCard recipe={item}/>))}
+                        {recipes.map(r => <RecipeCard key={r.title} recipe={r} />)}
                     </Box>
                 </Grid>
             </Grid>
+        </Box>
     );
 }
