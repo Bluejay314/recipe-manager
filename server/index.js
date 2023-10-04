@@ -4,6 +4,7 @@ const express = require("express");
 const dbConnect = require("./dbConnect");
 const recipeRoutes = require("./routes/recipeRoutes");
 const userRoutes = require("./routes/userRoutes");
+const aiRoutes = require("./routes/aiRoutes")
 const cors = require('cors');
 
 const app = express();
@@ -13,6 +14,7 @@ app.use("/", express.static("public"));
 
 app.use("/recipes", recipeRoutes);
 app.use("/user", userRoutes);
+app.use("/ai", aiRoutes);
 
 app.get("/", (_, res) => {
     res.json({ message: "success" });
