@@ -1,14 +1,17 @@
-import { Page } from "@/pages";
+
+import { Header } from "@/components";
 import { Box } from "@mui/material";
 
 export function ErrorPage({ error, resetErrorBoundary }) {
     return (
-        <Page>
+        <>
+            <Header />
             <Box>
                 <p>An error occurred:</p>
                 <pre>{error.message}</pre>
                 <button onClick={() => resetErrorBoundary()}>Try Again?</button>
             </Box>
-        </Page>
+        </>
+            
     );
 }
