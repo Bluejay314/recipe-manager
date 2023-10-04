@@ -16,10 +16,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 import RecipeStepper from "./recipeBuilder/RecipeStepper";
 import RecipeMenu from "./RecipeMenu";
+import { RecipeBuildProvider } from "@/context/RecipeBuildContext";
 
 const settings = ["Profile", "Logout"];
 
-export function Header({ children }) {
+export function Header({ children, height }) {
     const { currentUser, handleUpdateUser } = useUserContext();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -56,20 +57,35 @@ export function Header({ children }) {
 
     return (
         <Box
+            position="sticky"
+            top="0"
+            height={height}
             display="flex"
             justifyContent={"center"}
             alignItems="center"
-            minHeight="10vh"
             color="white"
+            zIndex="5"
             sx={{
                 px: {md: "2em", xl: "4em"},
-                backgroundColor: "rgb(245, 144, 66)"
+                backgroundColor: "rgb(47, 94, 128)",
+                boxShadow: "0 0 0.5em 0.25em rgba(0, 0, 0, 0.25)"
             }}
         >
             {children}
             <img src="/src/assets/logo.png" height="100vh"/>
-            <Logo content="CULINARY COMPANION" variant="h5"/>
+            <Logo content="CULINARY COMPANION" variant="h6"/>
             <SearchBar/>
+
+            <Box display="flex" gap="0.5em" ml="0.75em">
+                <MenuItem component={NavLink} to="/" sx={{
+                    backgroundColor: "rgba(255, 162, 23, 0.75)",
+                    borderRadius: "1em"
+                }}>Home</MenuItem>
+                <MenuItem onClick={() => setModalOpen(true)} sx={{
+                    backgroundColor: "rgba(255, 162, 23, 0.75)",
+                    borderRadius: "1em"
+                }}>New Recipe</MenuItem>
+            </Box>
 
             <Box flexGrow={1}></Box>
             
@@ -81,7 +97,7 @@ export function Header({ children }) {
                 <Typography variant="subtitle1">{currentUser.userName? currentUser.userName : "userName"}</Typography>
                 <Tooltip title="Options">
                     <IconButton onClick={handleOpenUserMenu}>
-                        <Avatar />
+                        <Avatar sx={{backgroundColor: "rgba(255, 162, 23, 0.75)", color: "white"}}/>
                     </IconButton>
                 </Tooltip>
                 <Menu
@@ -124,7 +140,10 @@ export function Header({ children }) {
                         boxShadow: 24,
                         p: 4,
                         }}>
-                        <RecipeStepper />
+                        <RecipeBuildProvider>
+                            <RecipeStepper />
+                        </RecipeBuildProvider>
+                        
                     </Box>
                 </Modal>    
         </Box>
