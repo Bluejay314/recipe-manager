@@ -14,11 +14,11 @@ import { useRecipeBuildContext } from '@/context/RecipeBuildContext';
 import axios from 'axios';
 import { useUserContext } from '@/context/UserContext';
 
-const steps = ['Recipe Details', 'Add an Image', 'Final'];
+const steps = ['Recipe Details', 'Add an Image', 'Finish'];
 
 export default function RecipeStepper() {
     const { currentUser } = useUserContext();
-    const { recipe, resetRecipe, getFormData } = useRecipeBuildContext();
+    const { recipe, resetRecipe, getCreateFormData } = useRecipeBuildContext();
     const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
@@ -36,7 +36,7 @@ export default function RecipeStepper() {
         try {
             console.log(`recipe tags: ${recipe.tags} type: ${typeof recipe.tags}`);
             console.log(`recipe tags split: ${recipe.tags.split(",")} type: ${typeof recipe["tags"].split(",")}`)
-            const formData = getFormData();
+            const formData = getCreateFormData();
 
             const response = await axios.post(`http://localhost:3010/recipes/${currentUser.id}`, formData) 
             console.log(response.data);

@@ -42,7 +42,7 @@ export function SearchBar() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/search?q=${query}`);
+        navigate(`/user/search?q=${query}`);
     };
 
     return (

@@ -122,7 +122,7 @@ export const AIAvatar = () => {
                         </Box>
                     )}
 
-                    {botState === "method" && (
+                    {botState === "steps" && (
                         <Box display="flex" flexDirection="column" justifyContent="center">
                             <Typography variant="body1" textAlign="center" pb="1em">{methodGreeting}</Typography>
                             <TextField multiline value={question} onChange={(e) => setQuestion(e.target.value)}/>
@@ -149,7 +149,7 @@ export const AIAvatar = () => {
                     {botState === "ask" && (
                         <Box display="flex" flexDirection="column" justifyContent="center">
                             {loading? (
-                                <Box sx={{ display: 'flex', justifyContent: "center", alignItems:"center", gap: '0.5em' }}>
+                                <Box sx={{ display: 'flex', justifyContent: "center", alignItems:"center", gap: '0.5em', pb: "1em" }}>
                                     <CircularProgress /> Thinking ...
                                 </Box>
                             ) : (<Typography variant="body1" fontStyle="italic" pb="1em">{response}</Typography>)

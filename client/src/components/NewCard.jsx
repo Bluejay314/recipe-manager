@@ -16,7 +16,7 @@ export default function NewCard({ recipe }) {
         event.preventDefault();
         navigate(`/user/recipes?q=${recipe._id}`)
     }
-
+//mkR9KfsT1WkbVnZF
     return (
         <Box>
             <CardActionArea onClick={handleOpen} sx={{position: "relative"}}>

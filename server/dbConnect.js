@@ -7,7 +7,7 @@ const mongooseOptions = {
     useUnifiedTopology: true
 };
 
-Mongoose.connect(process.env.DB_LOCAL_URI, mongooseOptions)
+Mongoose.connect(process.env.DB_CLOUD_URI, mongooseOptions)
     .then(() => console.log('MongoDB Connected'))
     .catch(error => console.log('MongoDB Error: '+error.message));
 

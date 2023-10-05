@@ -68,7 +68,7 @@ export default function RecipeMenu() {
     }
 
     const handleSaveAs = () => {
-        
+
     }
 
     const drawer = (
@@ -78,12 +78,6 @@ export default function RecipeMenu() {
                     <ListItemButton onClick={handleSave} disabled={!recipe.canEdit? true : false}>
                         <ListItemIcon><ModeEditIcon /></ListItemIcon>
                         <ListItemText primary="Save" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton onClick={handleSaveAs} disabled={!recipe.canEdit? true : false}>
-                        <ListItemIcon><ModeEditIcon /></ListItemIcon>
-                        <ListItemText primary="Save As" />
                     </ListItemButton>
                 </ListItem>
 
@@ -117,54 +111,58 @@ export default function RecipeMenu() {
         <Box>
             <CssBaseline />
             {botEnabled && <AIAvatar />}
-                    <Box
-                        sx={{    
-                            width: drawerWidth,
-                            height: "100vh",
-                            display: {xs: "none", md: "flex"}
-                            }}
-                        open
-                    >
-                        {drawer}
-                    </Box>
+            <Box display="flex" justifyContent="center" py="0.5em" borderBottom="0.15em solid rgba(0, 0, 0, 0.2)">
+                <Typography variant="h6">Actions</Typography>
+            </Box>
+            
+            <Box
+                sx={{    
+                    width: drawerWidth,
+                    height: "100vh",
+                    display: {xs: "none", md: "flex"}
+                    }}
+                open
+            >
+                {drawer}
+            </Box>
 
-                {/* The following is for mobile devices or small screens */}
-                <Drawer
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: { xs: 'block', md: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
-                >
-                    {drawer}
-                </Drawer>
+            {/* The following is for mobile devices or small screens */}
+            <Drawer
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                    display: { xs: 'block', md: 'none' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                }}
+            >
+                {drawer}
+            </Drawer>
 
-                <IconButton
-                    color="black"
-                    edge="start"
-                    onClick={handleDrawerToggle}
-                    sx={{ 
-                        display: {xs: "block", md: "none"}, 
-                        alignItems: "center",
-                        color: "rgb(100, 64, 35)",
-                        justifyContent: "center",
-                        boxShadow: "0 0 4px rgb(100, 64, 35)",
-                        mr: 2, 
-                        border: "2px solid rgb(100, 64, 35)",
-                        aspectRatio: 1,
-                        position: "absolute",
-                        top: "5em",
-                        right: "1em",
-                        zIndex: 99
-                    }}
-                >
-                    <MenuIcon sx={{pb: "0.em",}} />
-                </IconButton>
+            <IconButton
+                color="black"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ 
+                    display: {xs: "block", md: "none"}, 
+                    alignItems: "center",
+                    color: "rgb(100, 64, 35)",
+                    justifyContent: "center",
+                    boxShadow: "0 0 4px rgb(100, 64, 35)",
+                    mr: 2, 
+                    border: "2px solid rgb(100, 64, 35)",
+                    aspectRatio: 1,
+                    position: "absolute",
+                    top: "5em",
+                    right: "1em",
+                    zIndex: 99
+                }}
+            >
+                <MenuIcon sx={{pb: "0.em",}} />
+            </IconButton>
         </Box>
     );
 }

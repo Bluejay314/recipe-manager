@@ -15,7 +15,7 @@ const getRecipe = async (req, res) => {
 const getUserRecipes = async (req, res) => {
     try {
         let recipe;
-        if(req.query.amount) {
+        if(req.query.amount && req.query.amount != -1) {
             const limit = Number(req.query.amount);
             recipe = await Recipe.find({ user: req.params.id }).limit(limit);
         }
@@ -26,6 +26,46 @@ const getUserRecipes = async (req, res) => {
         res.send({ result: 500, error: err.message });
     }
 };
+
+const searchRecipes = async (req, res) => {
+    const searchTerm = req.params.q;
+    const userId = req.params.id;
+    console.log(`searchterm: ${searchTerm}, ${typeof searchTerm}`)
+    try {
+        let recipes = await Recipe.find({
+            user: userId,
+            $or: [
+              { title: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search in title
+              { tags: { $in: [searchTerm] } }, // Search for searchTerm in the tags array
+            ],
+          })
+          .sort({
+            // Sort the results based on whether searchTerm is in both title and tags
+            score: {
+              $meta: "textScore", // Using text score for sorting
+            },
+          });
+    
+          res.send({status: 200, data: recipes})
+    }
+    catch(err) {
+        res.send({status:500, data: err.message})
+    }
+    
+}
+
+const getFavourites = async (req, res) => {
+    try {
+        const recipes = await Recipe.find({
+            user:req.params.id,
+            favourite: {"$eq": true}
+        });
+        
+        res.send({ result: 200, data: recipes });
+    } catch (err) {
+        res.send({ result: 500, error: err.message });
+    }
+}
 
 const createRecipe = async (req, res) => {
     try {
@@ -76,8 +116,10 @@ const deleteRecipe = (req, res) => {
 module.exports = {
     getRecipe,
     getUserRecipes,
+    getFavourites,
     createRecipeImage,
     createRecipe,
     updateRecipe,
     deleteRecipe,
+    searchRecipes
 };
