@@ -1,6 +1,6 @@
 import useQuery from "@/hooks/useQuery";
-import { Box, CardActionArea, CssBaseline, Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
-import { CollapsableMenu, Header } from "@/components";
+import { Box, CardActionArea, CssBaseline, Divider, Grid, IconButton, Paper, TextField, Typography } from "@mui/material";
+import { AIAvatar, CollapsableMenu, Header } from "@/components";
 import { useEffect, useState } from "react";
 import RecipeMenu from "@/components/RecipeMenu";
 import { useRecipe } from "@/hooks/useRecipe";
@@ -58,117 +58,127 @@ export function RecipePage() {
         </Typography>
     ))
    
-    const imageStyle = {
-        width: "80%",
-        aspectRatio: "1",
-        border: "0.5em solid white",
-        outline: "0.25em solid rgba(0, 0, 0, 0.75)",
-    }
-
     const headerHeight = "10vh";
     return (
         <Box overflow="hidden">
             <CssBaseline />
-            <Header height={headerHeight}>
-                <Box sx={{display: {xs: "block", md:"none"}}}><RecipeMenu isMobile/></Box>
-            </Header>
+            
+            <Header height={headerHeight} />
 
             <Box display="flex" sx={{height: `calc(100vh - ${headerHeight})`}}>
                 <RecipeMenu />
+                <Box overflow="scroll" backgroundColor="rgba(0, 0, 0, 0.2)">
+                    <Paper elevation={8} sx={{
+                        px: {xs: "1.5em", lg:"5em"},
+                        py:"2em",
+                        mx: {xs: "none", md: "1em", lg: "3em", xl: "12em"},
+                        my: "1em"
+                    }}>
+                        <Box display="flex" alignItems="center"  gap="2em" mb="2em" sx={{
+                            flexDirection: {xs: "column", lg: "row"}
+                        }}>
+                            {/* Image Section */}
+                            <Box display="flex" flexGrow="1" justifyContent="flex-start" sx={{
+                                width: {xs: "70%", sm: "40%", lg:"100%"},
+                                aspectRatio: "1",
+                                border: "0.5em solid white",
+                                outline: "0.25em solid rgba(0, 0, 0, 0.75)"}}>
+                                <img src={`http://localhost:3010${recipeData.image}`} style={{
+                                    objectFit: "cover"
+                                }}/>
+                            </Box>
 
-                <Box display="flex" flexDirection="column" flexGrow="1" overflow="scroll" p="2em 4em">
-                    <Box display="flex" gap="2em" mb="2em">
-                        {/* Image Section */}
-                        <Box display="flex" flexGrow="1" justifyContent="flex-start">
-                            <img src={`http://localhost:3010${recipeData.image}`} style={imageStyle} />
-                        </Box>
+                            {/* Header Section */}
+                            <Box 
+                                display="flex" 
+                                flexDirection="column" 
+                                justifyContent="flex-start" 
+                                flexGrow="2" 
+                                textAlign="center"
+                                py="1em"
+                            >
+                                <Box>
+                                    <Typography variant="h4" pb={4} maxHeight="60%" sx={{
+                                    }}>
+                                        {recipe.title}
+                                    </Typography>
 
-                        {/* Header Section */}
-                        <Box 
-                            display="flex" 
-                            flexDirection="column" 
-                            justifyContent="flex-start" 
-                            flexGrow="2" 
-                            textAlign="center"
-                            py="1em"
-                        >
-                            <Box>
-                                <Typography variant="h4" pb={4} maxHeight="60%">
-                                    {recipe.title}
-                                </Typography>
-
-                                <Box display="flex" justifyContent="center" gap="0.5em" >
-                                    {tagItems}
+                                    <Box display="flex" justifyContent="center" gap="0.5em" >
+                                        {tagItems}
+                                    </Box>
                                 </Box>
+                                
+                                <Typography mt="4em" variant="body1" textAlign="left">
+                                    {recipe.description}
+                                </Typography>
                             </Box>
-                            
-                            <Typography mt="4em" variant="body1" textAlign="left">
-                                {recipe.description}
-                            </Typography>
                         </Box>
-                    </Box>
 
-                    <Grid container justifyContent="space-between">
-                        {/* Ingredients Section */}
-                        <Grid item xs={4} pr={4}>
-                            <Typography variant="h5" fontWeight="bold" mb={2} p="0.25em 0.5em" borderRadius="0.25em" backgroundColor="rgba(255, 162, 0,0.5)">
-                                Ingredients
-                            </Typography>
-                            <Box display="flex" flexDirection="column" gap={2}>
-                                {recipe.ingredients.map((ingredient, index) => (
-                                    <>
-                                        <FormField key={index} section="ingredients" index={index} variant="body1" canEdit={recipe.canEdit}/>
-                                        <Divider display="flex" alignItems="center" width="80%" />
-                                    </>
-                                ))}
-                                {recipe.canEdit && <InsertMore section="ingredients" />}
-                            </Box>
-                        </Grid>
-
-                        {/* Method Section */}
-                        <Grid item xs={8}>
-                            <Typography variant="h5" fontWeight="bold" mb={2} p="0.25em 0.5em" borderRadius="0.25em" backgroundColor="rgba(255, 162, 0,0.5)">
-                                Method
-                            </Typography>
-                            {recipe.canEdit? (
-                                <>
-                                    <DragDropContext  onDragEnd={(res) => onDragEnd(res, "steps")}>
-                                        <Droppable droppableId="methodList">
-                                            {(provided) => (
-                                                <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-                                                    {recipe.steps.map((step, index) => (
-                                                        <Draggable key={`step ${index}`} draggableId={`step ${index}`} index={index}>
-                                                            {provided => (
-                                                                <Box pb={2}  {...provided.draggableProps}>
-                                                                    <Typography variant="subtitle1" fontWeight={600} ref={provided.innerRef}  {...provided.dragHandleProps}>
-                                                                        Step {index + 1}
-                                                                    </Typography>
-                                                                    <FormField section="steps" index={index} variant="body1" canEdit={recipe.canEdit}/>
-                                                                </Box>
-                                                            )}
-                                                        </Draggable>
-                                                    ))}
-                                                    {provided.placeholder}
-                                                </ul>
-                                            )}
-                                        </Droppable>
-                                    </DragDropContext>
-                                    <InsertMore section="steps" />
-                                </>
-                            ) : (
-                                <>
-                                    {recipe.steps.map((step, index) => (
-                                        <Box pb={2}>
-                                            <Typography variant="subtitle1" fontWeight={600}>
-                                                Step {index + 1}
-                                            </Typography>
-                                            <FormField section="steps" index={index} variant="body1" canEdit={recipe.canEdit}/>
+                        <Grid container justifyContent="space-between">
+                            {/* Ingredients Section */}
+                            <Grid item xs={12} lg={4} sx={{
+                                pr: {xs: "0", md:"1em"},
+                                pb: {xs: "2em", md: "0"}
+                            }}>
+                                <Typography variant="h5" fontWeight="bold" mb={2} p="0.25em 0.5em" borderRadius="0.25em" backgroundColor="rgba(255, 162, 0,0.5)">
+                                    Ingredients
+                                </Typography>
+                                <Box display="flex" flexDirection="column" gap={2}>
+                                    {recipe.ingredients.map((ingredient, index) => (
+                                        <Box key={index}>
+                                            <FormField key={index} section="ingredients" index={index} variant="body1" canEdit={recipe.canEdit}/>
+                                            <Divider display="flex" width="80%" />
                                         </Box>
                                     ))}
-                                </>
-                            )}
+                                    {recipe.canEdit && <InsertMore section="ingredients" />}
+                                </Box>
+                            </Grid>
+
+                            {/* Method Section */}
+                            <Grid item xs={12} lg={8}>
+                                <Typography variant="h5" fontWeight="bold" mb={2} p="0.25em 0.5em" borderRadius="0.25em" backgroundColor="rgba(255, 162, 0,0.5)">
+                                    Method
+                                </Typography>
+                                {recipe.canEdit? (
+                                    <>
+                                        <DragDropContext  onDragEnd={(res) => onDragEnd(res, "steps")}>
+                                            <Droppable droppableId="methodList">
+                                                {(provided) => (
+                                                    <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+                                                        {recipe.steps.map((step, index) => (
+                                                            <Draggable key={`step ${index}`} draggableId={`step ${index}`} index={index}>
+                                                                {provided => (
+                                                                    <Box pb={2}  {...provided.draggableProps}>
+                                                                        <Typography variant="subtitle1" fontWeight={600} ref={provided.innerRef}  {...provided.dragHandleProps}>
+                                                                            Step {index + 1}
+                                                                        </Typography>
+                                                                        <FormField section="steps" index={index} variant="body1" canEdit={recipe.canEdit}/>
+                                                                    </Box>
+                                                                )}
+                                                            </Draggable>
+                                                        ))}
+                                                        {provided.placeholder}
+                                                    </ul>
+                                                )}
+                                            </Droppable>
+                                        </DragDropContext>
+                                        <InsertMore section="steps" />
+                                    </>
+                                ) : (
+                                    <>
+                                        {recipe.steps.map((step, index) => (
+                                            <Box key={index} pb={2}>
+                                                <Typography variant="subtitle1" fontWeight={600}>
+                                                    Step {index + 1}
+                                                </Typography>
+                                                <FormField section="steps" index={index} variant="body1" canEdit={recipe.canEdit}/>
+                                            </Box>
+                                        ))}
+                                    </>
+                                )}
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </Paper>
                 </Box>
             </Box>
         </Box>
