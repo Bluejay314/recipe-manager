@@ -16,10 +16,10 @@ export function SearchPage() {
     const q = query.get("q");
 
     useEffect(() => {
-        axios.get(`https://crossorigin.me/http://localhost:3010/recipes/${currentUser.id}/search/${q}`, {headers: headers})
+        axios.get(`http://localhost:3010/recipes/${currentUser.id}/search/${q}`, {headers: headers})
             .then(response => {
                 setRecipes(response.data.data);
-                console.dir(recipes);
+                console.dir(response.data);
             })
             .catch(err => console.log(err.message))
     },[q]);
@@ -36,7 +36,7 @@ export function SearchPage() {
                         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                         gap: "2em"
                     }}>
-                        {/* {recipes.map(r => <NewCard key={r.title} recipe={r} />)} */}
+                        {recipes.map(r => <NewCard key={r.title} recipe={r} />)}
                     </Box>)}
                 </Grid>
             </Grid>
