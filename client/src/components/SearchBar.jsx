@@ -7,7 +7,7 @@ import { Box, MenuItem } from "@mui/material";
 
 const Search = styled("form")(({ theme }) => ({
     position: "relative",
-    minWidth: "20ch",
+    minWidth: "10ch",
     maxWidth: "40ch",
     width: "100%",
     borderRadius: theme.shape.borderRadius,
