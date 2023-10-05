@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import { CollapsableMenu, Header, RecipeCard } from "@/components";
 import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
@@ -24,22 +24,35 @@ export function SearchPage() {
             .catch(err => console.log(err.message))
     },[q]);
 
-    
+    const headerColor = "rgba(255, 162, 0,0.5)";
     
     return (
-        <Box>
+        <Box display="flex" flexDirection="column" height="100vh" overflow="scroll"  backgroundColor="rgba(0, 0, 0, 0.2)">
             <Header />
-            <Grid container py={4}>
-                <Grid item px={4} sm>
-                    {recipes && (<Box sx={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                        gap: "2em"
-                    }}>
-                        {recipes.map(r => <NewCard key={r.title} recipe={r} />)}
-                    </Box>)}
-                </Grid>
-            </Grid>
+            <Box  mx="22%">
+                <Paper elevation={8}>
+                        <Box 
+                            flexDirection="column" 
+                            alignContent="center" 
+                            height="100vh"
+                            py="4em"
+                            px="2em" 
+                            gap="4em" 
+                            backgroundColor="white"
+                        >
+                       
+                        <Box pb="3em">
+                            <Grid container gap="2em" justifyContent="flex-start">
+                                {recipes?.map((recipe, i) => (
+                                    <Grid key={i + recipe.title} item sm={12} md={3} xl={2}>
+                                        <NewCard  recipe={recipe} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Box>
+                    </Box>
+                </Paper>
+            </Box>
         </Box>
     );
 }

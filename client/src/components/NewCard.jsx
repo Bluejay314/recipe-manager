@@ -46,7 +46,7 @@ export default function NewCard({ recipe }) {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography gutterBottom variant="body1" fontFamily='Gabarito' component="div">
                     {recipe.title}
                 </Typography>
             </CardContent>

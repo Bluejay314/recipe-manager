@@ -98,7 +98,7 @@ export function RecipePage() {
                                 py="1em"
                             >
                                 <Box>
-                                    <Typography variant="h4" pb={4} maxHeight="60%" sx={{
+                                    <Typography variant="h4" pb={4} fontFamily='Gabarito' fontWeight={600} maxHeight="60%" sx={{
                                     }}>
                                         {recipe.title}
                                     </Typography>
@@ -108,7 +108,7 @@ export function RecipePage() {
                                     </Box>
                                 </Box>
                                 
-                                <Typography mt="4em" variant="body1" textAlign="left">
+                                <Typography mt="4em" variant="body1"  textAlign="left">
                                     {recipe.description}
                                 </Typography>
                             </Box>
