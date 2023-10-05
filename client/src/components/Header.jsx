@@ -73,7 +73,7 @@ export function Header({ children, height }) {
         >
             {children}
             <img src="/src/assets/logo.png" height="100vh"/>
-            <Logo content="CULINARY COMPANION" variant="h6"/>
+            <Logo content="COOKS COMPANION" variant="h6"/>
             <SearchBar/>
 
             <Box display="flex" gap="0.5em" ml="0.75em">
