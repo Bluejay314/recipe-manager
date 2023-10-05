@@ -10,6 +10,7 @@ const recipeSchema = new Schema({
     ingredients: {type: [String], default: []},
     steps: {type: [String], default: []},
     favourite: {type: Boolean, default: false},
+    parent: {type: mongoose.Schema.Types.ObjectId, ref: "recipe"},
     pastVersions: {type: [mongoose.Schema.Types.ObjectId], ref: "recipe"},
     user: {type: mongoose.Schema.Types.ObjectId, ref: "user"},
 
