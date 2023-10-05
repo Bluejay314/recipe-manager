@@ -1,0 +1,21 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile-server # specify the Dockerfile for your server
+    ports:
+      - "3010:5000" # map server port to host
+    volumes:
+      - ./server:/app/server # mount your server code
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile-client # specify the Dockerfile for your client
+    ports:
+      - "5173:5000" # map client port to host
+    volumes:
+      - ./client:/app/client # mount your client code
+    depends_on:
+      - server # ensure the server container is started first
