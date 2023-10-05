@@ -22,10 +22,13 @@ npm install
 
 ## Usage
 ```
+cd server
+npm run start
+cd ..
 cd client
 npm run start
 ```
-The client runs on port 5173, so once up and running navigate to http://localhost:5173 to see the application
+The client runs on port 5173 and the server runs on port 3010, so once up and running navigate to http://localhost:5173 to see the application
 
 ## Contributing
 
