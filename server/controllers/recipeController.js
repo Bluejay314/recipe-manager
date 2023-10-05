@@ -30,7 +30,7 @@ const getUserRecipes = async (req, res) => {
 const searchRecipes = async (req, res) => {
     const searchTerm = req.params.q;
     const userId = req.params.id;
-    console.log(`searchterm: ${searchTerm}, ${typeof searchTerm}`)
+    
     try {
         let recipes = await Recipe.find({
             user: userId,
@@ -39,12 +39,6 @@ const searchRecipes = async (req, res) => {
               { tags: { $in: [searchTerm] } }, // Search for searchTerm in the tags array
             ],
           })
-          .sort({
-            // Sort the results based on whether searchTerm is in both title and tags
-            score: {
-              $meta: "textScore", // Using text score for sorting
-            },
-          });
     
           res.send({status: 200, data: recipes})
     }
