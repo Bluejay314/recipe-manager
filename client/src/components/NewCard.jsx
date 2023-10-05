@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { Box, CardActionArea, Divider } from "@mui/material";
+import StarIcon from '@mui/icons-material/Star';
 
 export default function NewCard({ recipe }) {
     const navigate = useNavigate();
@@ -15,16 +16,29 @@ export default function NewCard({ recipe }) {
         event.preventDefault();
         navigate(`/user/recipes?q=${recipe._id}`)
     }
+
     return (
-        <Box sx={{ maxWidth: 345 }}>
-            <CardActionArea onClick={handleOpen}>
-            <CardMedia
-               component="img"
-               alt={recipe.title}
-               width="100%"
-               image={`http://localhost:3010${recipe.image}`}
-               sx={{aspectRatio: 1.5, }}
-            />
+        <Box>
+            <CardActionArea onClick={handleOpen} sx={{position: "relative"}}>
+                <CardMedia
+                    component="img"
+                    alt={recipe.title}
+                    width="100%"
+                    image={`http://localhost:3010${recipe.image}`}
+                    sx={{aspectRatio: 1.5}}
+                />
+                {recipe.favourite && (<Box sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: "rgba(255, 255, 255, 0.4)"
+                }}>
+                    <StarIcon sx={{
+                        color: "yellow",
+                        stroke: "black"
+                        }} />
+                </Box>)}
             </CardActionArea>
             <CardContent sx={{
                 display: "flex",
@@ -32,7 +46,7 @@ export default function NewCard({ recipe }) {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-                <Typography gutterBottom variant="subtitle1" fontWeight="bold" component="div">
+                <Typography gutterBottom variant="body1" component="div">
                     {recipe.title}
                 </Typography>
             </CardContent>
