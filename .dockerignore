@@ -1,3 +1,17 @@
+# Ignore node_modules in client and server folders
+client/node_modules
+server/node_modules
+
+# Ignore development and editor-specific files
+.git
+.vscode
+npm-debug.log
+
+# Ignore build and test artifacts
+build/
+coverage/
+*.log
+
 # Logs
 logs
 *.log

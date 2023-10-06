@@ -1,16 +1,28 @@
-# Start your image with a node base image
-FROM node:19-alpine
+# Use a Node.js base image
+FROM node:16.3.0-alpine
 
-# The /app directory should act as the main application directory
+# Create a working directory for your app
 WORKDIR /app
 
-# Copy the app package and package-lock.json file
-COPY . .
+# Copy package.json and package-lock.json for server
+COPY server/package*.json ./server/
 
-# Install node packages, install serve, build the app, and remove dependencies at the end
+# Copy package.json and package-lock.json for client
+COPY client/package*.json ./client/
+
+# Install server dependencies
+WORKDIR /app/server
 RUN npm install
 
-EXPOSE 3000
+# Install client dependencies
+WORKDIR /app/client
+RUN npm install
 
-# Start the app using serve command
-CMD [ "npm", "start" ]
+# Copy the rest of your application code
+COPY . .
+
+# Expose the ports your applications run on
+EXPOSE 3010 5173
+
+# Start both server and client
+CMD ["npm", "start"]
