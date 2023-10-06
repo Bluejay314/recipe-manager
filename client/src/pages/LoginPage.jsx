@@ -1,7 +1,7 @@
 import { Box, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
-export function LoginPage() {
+export default function LoginPage() {
     return (
         <Box sx={{
             height: "100%",

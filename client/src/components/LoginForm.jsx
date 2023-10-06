@@ -30,7 +30,7 @@ const EmailInput = ({ state }) => {
     )
 }
 
-export function LoginForm() {
+export default function LoginForm() {
     const { currentUser, handleUpdateUser } = useUserContext();
     const [emailState, setEmailState] = useState({isValid: true, message: ""});
     const [passwordState, setPasswordState] = useState({isValid: true, message: ""});

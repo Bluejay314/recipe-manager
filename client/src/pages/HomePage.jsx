@@ -1,16 +1,17 @@
-import { Header, RecipeCard } from "@/components";
-import NewCard from "@/components/NewCard";
+import Header from "@/components/Header";
+import RecipeCard from "@/components/RecipeCard";
 import { useUserContext } from "@/context/UserContext";
 import { useRecipes } from "@/hooks/useRecipes";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export function HomePage() {
-    let recipes = useRecipes("8");
+export default function HomePage() {
+    let recipes = useRecipes("-1");
     const [favourites, setFavourites] = useState();
     const { currentUser } = useUserContext();
-    console.log(`userId: ${typeof currentUser.id}`)
+    console.log(`userId: ${typeof currentUser.id}`);
+
     useEffect(() => {
         try {
             axios.get(`http://localhost:3010/recipes/${currentUser.id}/favourites`)
@@ -46,7 +47,7 @@ export function HomePage() {
                             <Grid container gap="2em" justifyContent="flex-start">
                             {favourites && favourites.map((r, i) => (
                                     <Grid key={i + r.title} item sm={12} md={3} xl={2}>
-                                        <NewCard  recipe={r} />
+                                        <RecipeCard  recipe={r} />
                                     </Grid>
                                 ))}
                             </Grid> 
@@ -58,7 +59,7 @@ export function HomePage() {
                             <Grid container gap="2em" justifyContent="flex-start">
                                 {recipes?.map((recipe, i) => (
                                     <Grid key={i + recipe.title} item sm={12} md={3} xl={2}>
-                                        <NewCard  recipe={recipe} />
+                                        <RecipeCard  recipe={recipe} />
                                     </Grid>
                                 ))}
                             </Grid>

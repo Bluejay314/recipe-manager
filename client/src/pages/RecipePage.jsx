@@ -1,24 +1,20 @@
-import useQuery from "@/hooks/useQuery";
-import { Box, CardActionArea, CssBaseline, Divider, Grid, IconButton, Paper, TextField, Typography } from "@mui/material";
-import { AIAvatar, CollapsableMenu, Header } from "@/components";
-import { useEffect, useState } from "react";
+import Header from "@/components/Header";
 import RecipeMenu from "@/components/RecipeMenu";
-import { useRecipe } from "@/hooks/useRecipe";
 import { useRecipeBuildContext } from "@/context/RecipeBuildContext";
-import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import useQuery from "@/hooks/useQuery";
+import { useRecipe } from "@/hooks/useRecipe";
+import { Box, CardActionArea, ClickAwayListener, CssBaseline, Divider, Grid, IconButton, Paper, TextField, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
-export function RecipePage() {
+export default function RecipePage() {
     const query = useQuery();
     const recipeId = query.get("q");
     const recipeData = useRecipe(recipeId);
     const { recipe, updateRecipe } = useRecipeBuildContext();
 
-    useEffect(() => {
-        updateRecipe(recipeData); 
-
-    }, [recipeData]);
+    useEffect(() => updateRecipe(recipeData), [recipeData]);
 
     if(recipe.title === "") {
         return (
@@ -222,7 +218,7 @@ const FormField = ({ section, index=-1, variant, canEdit }) => {
     if(editable) {
         return (
             <ClickAwayListener onClickAway={handleCanEdit}>
-            <TextField 
+            <TextField
                 multiline
                 fullWidth
                 value={content}

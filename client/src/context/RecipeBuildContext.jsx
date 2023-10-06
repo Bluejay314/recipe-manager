@@ -3,15 +3,6 @@ import { useUserContext } from "./UserContext";
 
 const RecipeBuildContext = createContext();
 
-const defaultState = {
-    title: "",
-    description: "",
-    tags: "",
-    favourite: false,
-    image: "",
-    canEdit: false
-}
-
 export const RecipeBuildProvider = (props) => {
     const { currentUser } = useUserContext();
     const [recipe, setRecipe] = useState({

@@ -43,7 +43,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-export function CollapsableMenu({ title, labels }) {
+export default function CollapsableMenu({ title, labels }) {
     const [expanded, setExpanded] = React.useState(true);
 
     const handleChange = () => {

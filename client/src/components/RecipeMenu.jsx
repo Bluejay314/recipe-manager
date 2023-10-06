@@ -1,21 +1,14 @@
-import { Fragment, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Paper } from "@mui/material";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { useRecipeBuildContext } from "@/context/RecipeBuildContext";
@@ -23,7 +16,8 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import SaveIcon from '@mui/icons-material/Save';
 import Switch from '@mui/material/Switch';
 import axios from "axios";
-import { AIAvatar } from ".";
+import AIAvatar from "@/components/AIAvatar";
+import { Box, List } from "@mui/material";
 
 const drawerWidth = 300;
 
@@ -31,7 +25,6 @@ export default function RecipeMenu() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [botEnabled, setBotEnabled] = useState(false);
     const { recipe, updateRecipe, getUpdateFormData } = useRecipeBuildContext();
-    
     
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

@@ -15,7 +15,7 @@ const getRecipe = async (req, res) => {
 const getUserRecipes = async (req, res) => {
     try {
         let recipe;
-        if(req.query.amount && req.query.amount != -1) {
+        if(req.query.amount && req.query.amount != "-1") {
             const limit = Number(req.query.amount);
             recipe = await Recipe.find({ user: req.params.id }).limit(limit);
         }

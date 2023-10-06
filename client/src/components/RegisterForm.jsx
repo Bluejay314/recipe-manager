@@ -31,7 +31,7 @@ const validatePassword = (password) => {
     return [true, ""]
 }
 
-export function RegisterForm() {
+export default function RegisterForm() {
     const [emailState, setEmailState] = useState({
         isValid:true,
         message: ""

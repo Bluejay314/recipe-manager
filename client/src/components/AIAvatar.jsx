@@ -7,7 +7,7 @@ import axios from "axios";
 import Draggable from 'react-draggable';
 import { useRecipeBuildContext } from "@/context/RecipeBuildContext";
 
-export const AIAvatar = () => {
+export default function AIAvatar() {
     const [question, setQuestion] = useState("");
     const [response, setResponse] = useState("thinking...");
     const [botState, setBotState] = useState("greeting");

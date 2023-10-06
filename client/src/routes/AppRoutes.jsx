@@ -1,8 +1,12 @@
-import { RegisterForm, LoginForm } from "@/components";
-import { HomePage, LoginPage, RecipePage, SearchPage } from "@/pages";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { RecipeBuildProvider } from "@/context/RecipeBuildContext";
+import HomePage from "@/pages/HomePage";
+import SearchPage from "@/pages/SearchPage";
+import RecipePage from "@/pages/RecipePage";
+import LoginPage from "@/pages/LoginPage";
+import LoginForm from "@/components/LoginForm";
+import RegisterForm from "@/components/RegisterForm";
 
 export default function AppRoutes(props) {
     return (

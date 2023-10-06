@@ -1,5 +1,0 @@
-export { ErrorPage } from "./ErrorPage"
-export { HomePage } from "./HomePage"
-export { LoginPage } from "./LoginPage"
-export { SearchPage } from "./SearchPage"
-export { RecipePage } from "./RecipePage"

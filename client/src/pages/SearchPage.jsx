@@ -1,14 +1,12 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
-import { CollapsableMenu, Header, RecipeCard } from "@/components";
-import axios from "axios";
+import Header from "@/components/Header";
+import RecipeCard from "@/components/RecipeCard";
 import { useUserContext } from "@/context/UserContext";
-import { useEffect, useState } from "react";
 import useQuery from "@/hooks/useQuery";
-import NewCard from "@/components/NewCard";
+import { Box, Grid, Paper } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-
-
-export function SearchPage() {
+export default function SearchPage() {
     const [recipes, setRecipes] = useState([]);
     const { currentUser } = useUserContext();
     const headers = { "x-access-token": currentUser.token };
@@ -45,7 +43,7 @@ export function SearchPage() {
                             <Grid container gap="2em" justifyContent="flex-start">
                                 {recipes?.map((recipe, i) => (
                                     <Grid key={i + recipe.title} item sm={12} md={3} xl={2}>
-                                        <NewCard  recipe={recipe} />
+                                        <RecipeCard  recipe={recipe} />
                                     </Grid>
                                 ))}
                             </Grid>

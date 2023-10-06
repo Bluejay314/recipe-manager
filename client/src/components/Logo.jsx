@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-export function Logo({ content, variant }) {
+export default function Logo({ content, variant }) {
     return (
         <Typography
         variant={variant}

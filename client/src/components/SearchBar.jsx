@@ -2,8 +2,8 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
-import { Box, MenuItem } from "@mui/material";
+import { useState } from "react";
+import { Box } from "@mui/material";
 
 const Search = styled("form")(({ theme }) => ({
     position: "relative",
@@ -36,7 +36,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export function SearchBar() {
+export default function SearchBar() {
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
 

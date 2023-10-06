@@ -9,18 +9,17 @@ import {
     Tooltip,
     Typography,
 } from "@mui/material";
-import { Logo, SearchBar } from "@/components";
 import { useState } from "react";
-import { useUserContext } from "@/context/UserContext";
-import MenuIcon from "@mui/icons-material/Menu";
+import { useUserContext } from "../context/UserContext";
+import RecipeStepper from "./RecipeStepper";
+import { RecipeBuildProvider } from "../context/RecipeBuildContext";
+import Logo from "./Logo";
+import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
-import RecipeStepper from "./recipeBuilder/RecipeStepper";
-import RecipeMenu from "./RecipeMenu";
-import { RecipeBuildProvider } from "@/context/RecipeBuildContext";
 
 const settings = ["Profile", "Logout"];
 
-export function Header({ children, height }) {
+export default function Header({ children, height }) {
     const { currentUser, handleUpdateUser } = useUserContext();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -141,9 +140,8 @@ export function Header({ children, height }) {
                         p: 4,
                         }}>
                         <RecipeBuildProvider>
-                            <RecipeStepper />
+                            <RecipeStepper onFinish={() => setModalOpen(false)} />
                         </RecipeBuildProvider>
-                        
                     </Box>
                 </Modal>    
         </Box>
