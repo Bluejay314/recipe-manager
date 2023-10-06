@@ -3,6 +3,10 @@ import { useCookies } from 'react-cookie'
 
 const UserContext = React.createContext();
 
+/*
+  Provides information to any component that needs it. 
+  Sets user based on token in headers.
+*/
 export const UserProvider = (props) => {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
     const [currentUser, setCurrentUser] = useState(cookies.user ? cookies.user : {});

@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Box } from "@mui/material";
 
+/*
+  The contents of this file is taked from "https://mui.com/material-ui/react-app-bar/".
+  Much is unchanged as the code is complex
+*/
 const Search = styled("form")(({ theme }) => ({
     position: "relative",
     minWidth: "10ch",
@@ -17,6 +21,10 @@ const Search = styled("form")(({ theme }) => ({
     }
 }));
 
+/*
+  The contents of this file is taked from "https://mui.com/material-ui/react-app-bar/".
+  Much is unchanged as the code is complex
+*/
 const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: "100%",
@@ -27,6 +35,10 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
     justifyContent: "center",
 }));
 
+/*
+  The contents of this file is taked from "https://mui.com/material-ui/react-app-bar/".
+  Much is unchanged as the code is complex
+*/
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     "& .MuiInputBase-input": {

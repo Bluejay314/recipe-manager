@@ -11,8 +11,14 @@ import { useUserContext } from "@/context/UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// Matches emails that match:
+//  - any number of letters/numbers
+//  - @ symbol
+//  - any number of letters/characters
+//  - 2-3 letters
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
+//validation function for validating emails according to the regex
 const validateEmail = (email) => {
     if(email.length < 1)
         return [false, "An email is required"];
@@ -22,6 +28,7 @@ const validateEmail = (email) => {
     return [true, ""]
 }
 
+// validates the password input. Must be greater than 5 characters.
 const validatePassword = (password) => {
     if(password.length < 1)
         return [false, "A password is required"];
