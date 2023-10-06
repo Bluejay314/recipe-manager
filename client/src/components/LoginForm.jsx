@@ -13,25 +13,12 @@ import { useUserContext } from "@/context/UserContext";
 import axios from "axios";
 import { validateEmail, validatePassword } from "@/util/validation";
 
-const EmailInput = ({ state }) => {
-    return (
-        <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            error={!state.isValid}
-            helperText={state.message}
-        />
-    )
-}
-
+/*
+  This form is used to login the user. Displayed within the login page.
+  Once the user input is verified, the app navigates to the home page.
+*/
 export default function LoginForm() {
-    const { currentUser, handleUpdateUser } = useUserContext();
+    const { handleUpdateUser } = useUserContext();
     const [emailState, setEmailState] = useState({isValid: true, message: ""});
     const [passwordState, setPasswordState] = useState({isValid: true, message: ""});
     const [loginMessage, setLoginMessage] = useState("");
@@ -79,7 +66,21 @@ export default function LoginForm() {
                     onSubmit={handleSubmit}
                     sx={{ mt: 1, px: "2em" }}
                 >
-                    <EmailInput state={emailState}/>
+                    {/* Email input field */}
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        error={!emailState.isValid}
+                        helperText={emailState.message}
+                    />
+
+                    {/* Eassword input field */}
                     <TextField
                         margin="normal"
                         required
@@ -97,7 +98,11 @@ export default function LoginForm() {
                             Forgot password?
                         </Link>
                     </Grid>
+
+                    
                     <Box display="flex" flexDirection="column" alignItems="center">
+                        
+                        {/* Renders a message if an issues arises with logging in*/}
                         <Typography variant="h6" color="red" pt={2}>
                             {loginMessage}
                         </Typography>

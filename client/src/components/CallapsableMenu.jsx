@@ -7,6 +7,10 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { camelCase } from "@/util/format";
 
+/*
+  The contents of this file is taked from "https://mui.com/material-ui/react-accordion/"".
+  Much is unchanged as the code is complex
+*/
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -19,6 +23,10 @@ const Accordion = styled((props) => (
     },
 }));
 
+/*
+  The contents of this file is taked from "https://mui.com/material-ui/react-accordion/"".
+  Much is unchanged as the code is complex
+*/
 const AccordionSummary = styled((props) => (
     <MuiAccordionSummary
         expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
@@ -38,11 +46,19 @@ const AccordionSummary = styled((props) => (
     },
 }));
 
+/*
+  The contents of this file is taked from "https://mui.com/material-ui/react-accordion/"".
+  Much is unchanged as the code is complex
+*/
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     padding: theme.spacing(2),
     borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
+/*
+  A collapsable menu component. Unused in the current program state but is left
+  in for future versions. 
+*/
 export default function CollapsableMenu({ title, labels }) {
     const [expanded, setExpanded] = React.useState(true);
 

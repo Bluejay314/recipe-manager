@@ -1,7 +1,6 @@
 import {
     Avatar,
     Box,
-    Button,
     IconButton,
     Menu,
     MenuItem,
@@ -13,18 +12,20 @@ import { useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import RecipeStepper from "./RecipeStepper";
 import { RecipeBuildProvider } from "../context/RecipeBuildContext";
-import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
 
-const settings = ["Profile", "Logout"];
-
+/*
+  Header component displayed on all pages. Can specify a height component 
+  to better calculate the required size of the rest of the page 
+  (if header is 10vh, rest of page can be 90vh).
+*/
 export default function Header({ children, height }) {
     const { currentUser, handleUpdateUser } = useUserContext();
-    const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     
+
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -37,22 +38,6 @@ export default function Header({ children, height }) {
         handleCloseUserMenu();
         handleUpdateUser({});
     }
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const settingsItems = settings.map((setting) => (
-        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">
-                {setting}
-            </Typography>
-        </MenuItem>
-    ));
 
     return (
         <Box
@@ -123,6 +108,7 @@ export default function Header({ children, height }) {
                 </Menu>
             </Box>
                    
+                {/* This component only renders on screen if the 'New Recipe button' is clicked */}
                 <Modal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
@@ -146,4 +132,29 @@ export default function Header({ children, height }) {
                 </Modal>    
         </Box>
     );
+}
+
+/*
+  Seperated out for readability. Displays the title of the app.
+*/
+function Logo({ content, variant }) {
+    return (
+        <Typography
+        variant={variant}
+        component="a"
+        href="/"
+        sx={{
+          mr: 2,
+          display: { xs: 'none', md: 'block' },
+          fontFamily: 'Ultra',
+          fontWeight: 400,
+          letterSpacing: '.4rem',
+          color: "rgb(255, 255, 255)",
+          textShadow: "0 0 4px rgb(0,0,0)",
+          textDecoration: 'none',
+        }}
+      >
+        { content }
+      </Typography>
+    )
 }

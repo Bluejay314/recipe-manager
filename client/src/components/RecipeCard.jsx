@@ -9,17 +9,21 @@ import { useNavigate } from "react-router-dom";
 import { Box, CardActionArea, Divider } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 
+
+/*
+  Simple card component for displaying recipes.
+*/
 export default function RecipeCard({ recipe }) {
     const navigate = useNavigate();
 
-    const handleOpen = (event) => {
+    const handleClick = (event) => {
         event.preventDefault();
         navigate(`/user/recipes?q=${recipe._id}`)
     }
-//mkR9KfsT1WkbVnZF
+
     return (
         <Box>
-            <CardActionArea onClick={handleOpen} sx={{position: "relative"}}>
+            <CardActionArea onClick={handleClick} sx={{position: "relative"}}>
                 <CardMedia
                     component="img"
                     alt={recipe.title}

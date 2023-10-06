@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Box, CssBaseline, Typography } from "@mui/material";
 import { useRecipeBuildContext } from "@/context/RecipeBuildContext";
 
+/*
+  Component used in the 'RecipeStepper' component. Takes an optional
+  image to be used for the recipe.
+*/
 export default function RecipeImageForm() {
     const { recipe, updateRecipe } = useRecipeBuildContext();
     const [previewImage, setPreviewImage] = useState("");

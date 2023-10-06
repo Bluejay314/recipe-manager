@@ -7,6 +7,10 @@ import axios from "axios";
 import Draggable from 'react-draggable';
 import { useRecipeBuildContext } from "@/context/RecipeBuildContext";
 
+/*
+  AI element. Display an ai avatar with a speech bubble on the page.
+  Positioned absolute and can be dragged around.
+*/
 export default function AIAvatar() {
     const [question, setQuestion] = useState("");
     const [response, setResponse] = useState("thinking...");
@@ -16,19 +20,47 @@ export default function AIAvatar() {
     const { currentUser } = useUserContext();
     const { recipe } = useRecipeBuildContext();
 
+    // Greetings used for each category of questioning
     const greeting = `Hi ${currentUser.userName}! What can I help you today? What can I help you with today?`;
     const ingredientsGreeting = `How can I assist with your ingredients?`;
     const methodGreeting = `How can I assist with your method?`; 
     const descriptionGreeting = `How can I help with the description?`;
 
+    /*
+      react-draggable function.
+    */
     const onStart = () => {
         setDrag({...drag, activeDrags: ++drag.activeDrags});
-      };
+    };
     
+    /*
+      react-draggable function.
+    */
     const onStop = () => {
         setDrag({...drag, activeDrags: --drag.activeDrags});
-      };
+    };
 
+    /*
+      Gets response from server on clicked ask.
+    */
+    const handleAsk = async () => {
+        setBotState("ask");
+        const res = await getResponse();
+        setResponse(res.content);
+        setQuestion("")
+        console.log(res);
+    }
+
+    /*
+      Function to control display of MUI loading element.
+    */
+    const handleClickLoading = () => {
+        setLoading((prevLoading) => !prevLoading);
+    };
+
+    /*
+      Core function of the AI Avatar. Fetches a response fro the server.
+    */
     const getResponse = async () => {
         const headers = { "x-access-token": currentUser.token };
 
@@ -56,18 +88,6 @@ export default function AIAvatar() {
 
         else console.log(`No user: ${currentUser.id}`)
     }
-
-    const handleAsk = async () => {
-        setBotState("ask");
-        const res = await getResponse();
-        setResponse(res.content);
-        setQuestion("")
-        console.log(res);
-    }
-
-    const handleClickLoading = () => {
-        setLoading((prevLoading) => !prevLoading);
-    };
 
     return (
         <Draggable 
@@ -99,6 +119,7 @@ export default function AIAvatar() {
                     transform:"translate(80%,-80%)"
                     }}>
                 
+                    {/* Initial greetings page */}
                     {botState === "greeting" && (
                         <>
                             <Typography variant="body1" textAlign="center" pb="1em">{greeting}</Typography>
@@ -110,6 +131,7 @@ export default function AIAvatar() {
                         </>
                     )}
 
+                    {/* Ingredients prompt page */}
                     {botState === "ingredients" && (
                         <Box display="flex" flexDirection="column" justifyContent="center">
                             <Typography variant="body1" textAlign="center" pb="1em">{ingredientsGreeting}</Typography>
@@ -122,6 +144,7 @@ export default function AIAvatar() {
                         </Box>
                     )}
 
+                    {/* Method prompt page */}
                     {botState === "steps" && (
                         <Box display="flex" flexDirection="column" justifyContent="center">
                             <Typography variant="body1" textAlign="center" pb="1em">{methodGreeting}</Typography>
@@ -134,6 +157,7 @@ export default function AIAvatar() {
                         </Box>
                     )}
 
+                    {/* Description prompt page */}
                     {botState === "description" && (
                         <Box display="flex" flexDirection="column" justifyContent="center">
                             <Typography variant="body1" textAlign="center" pb="1em">{descriptionGreeting}</Typography>

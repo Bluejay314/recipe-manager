@@ -21,6 +21,10 @@ import { Box, List } from "@mui/material";
 
 const drawerWidth = 300;
 
+/*
+  Side menu displayed on the left side of the screen on the recipe page.
+  On smaller screens switches to a drawer component with a toggle button.
+*/
 export default function RecipeMenu() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [botEnabled, setBotEnabled] = useState(false);
@@ -30,6 +34,9 @@ export default function RecipeMenu() {
         setMobileOpen(!mobileOpen);
     };
 
+    /*
+      Update the database immediately if the user hits the favourite button.
+    */
     const handleFavourite = async () => {
         try {
             const response = await axios.put(`http://localhost:3010/recipes/update/${recipe._id}`, {favourite: !recipe.favourite})
@@ -46,9 +53,11 @@ export default function RecipeMenu() {
         updateRecipe({canEdit: !recipe.canEdit})
     }
 
+    /*
+      Takes the updated user data in context and sends back to server for update.
+    */
     const handleSave = async () => {
         updateRecipe({canEdit: false});
-
         
         try {
             const formData = getUpdateFormData();
@@ -56,7 +65,7 @@ export default function RecipeMenu() {
             const response = await axios.put(`http://localhost:3010/recipes/update/${recipe._id}`, formData); 
             console.log(response.data);
         } catch(err) {
-            console.log(err)
+            console.log(err);
         }
     }
 
